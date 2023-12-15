@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 const Header = () => {
-  
+
   const [shouldHide, setShouldHide] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -25,7 +25,7 @@ const Header = () => {
     <div>
       <Navbar expand="lg" bg="dark" variant="dark">
         <Container fluid>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="#home" className=" d-flex justify-content-start col-3">
             <img
               alt=""
               src=""
@@ -46,7 +46,6 @@ const Header = () => {
           </Form>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-
 
             <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
               <NavDropdown title="SignIn" id="navbarScrollingDropdown">
