@@ -1,0 +1,52 @@
+body{
+	font-family: Poppins, sans-serif;
+}
+
+ul{
+	text-decoration: none;
+	list-style: none;
+}
+
+.row{
+	align-items: center;
+}
+
+.dropdown-content{
+	position: absolute;
+	background-color: beige;
+	display: block;
+	left: 65%;
+	top: 45px;
+}
+
+.roleList{
+	text-align: start;
+}
+
+.roleList > li{
+	padding: 5px 0;
+}
+
+.hidden{
+	display: none;
+}
+
+.hamBurger{
+	height: 40px;
+	width: 40px;
+}
+
+.searchIcon{
+	height: 30px;
+	width: 30px;
+}
+
+.dropdownSidebar{
+	position: absolute;
+	background-color: beige;
+	display: block;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 60%;
+}

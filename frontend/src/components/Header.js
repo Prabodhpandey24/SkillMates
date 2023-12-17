@@ -1,70 +1,140 @@
 import React, { useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import "../styles/styles.css";
+import HamBar from "../img/ham.png";
+import Search from "../img/search.png";
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const [shouldHide, setShouldHide] = useState(false);
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setDropdownVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownVisible(false);
+  };
+
+  const [isComponentVisible, setComponentVisible] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
-      setShouldHide(window.innerWidth <= 647);
+      const windowWidth = window.innerWidth;
+      // Set the visibility based on the desired pixel range (e.g., between 600 and 900 pixels)
+      setComponentVisible(windowWidth <= 600);
     };
+
+    // Initial setup
     handleResize();
-    window.addEventListener('resize', handleResize);
+
+    // Event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const [openSideDrawer, setOpenSideMenu] = useState(false);
+
+  const hiddenstyle = {
+    display: isComponentVisible ? "none" : "flex",
+  };
+
+  const toggleDrawer = () => {
+    setOpenSideMenu(!openSideDrawer);
+  };
+
   return (
-    <div>
-      <Navbar expand="lg" bg="dark" variant="dark">
-        <Container fluid>
-          <Navbar.Brand href="#home" className=" d-flex justify-content-start col-3">
-            <img
-              alt=""
-              src=""
-              width="30"
-              height="30"
-              className="d-inline-block align-top ms-4"
-            />
-            {!shouldHide && <>Skill Mates</>}
-          </Navbar.Brand>
-          <Form className="d-flex mx-auto col-lg-5">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-
-            <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-              <NavDropdown title="SignIn" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Student</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Teacher</NavDropdown.Item>
-                <NavDropdown.Item href="#action5">School</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action6">
-                  Choose Your Role..
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#action1">SignUp</Nav.Link>
-            </Nav>
-
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <div className="container-fluid p-0">
+      <div className="bg-primary py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-3">
+              <img src=""></img>
+              <span className="text-light">Skill Mates</span>
+            </div>
+            <div className="col-5">
+              <input
+                type="text"
+                placeholder="Find Courses"
+                value={searchTerm}
+                onChange={handleInputChange}
+              />
+              {!isComponentVisible && (
+                <img src={Search} className="searchIcon"></img>
+              )}
+            </div>
+            <div className="col-sm-2" style={hiddenstyle}>
+              <a
+                href="#"
+                className="text-light"
+                onMouseEnter={handleMouseEnter}
+              >
+                Log In
+              </a>
+              {isDropdownVisible && (
+                <div
+                  className="dropdown-content"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <ul className="p-0 px-3 roleList">
+                    <li>
+                      <a href="#">Student</a>
+                    </li>
+                    <li>
+                      <a href="#">Educator</a>
+                    </li>
+                    <li>
+                      <a href="#">School</a>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+            <div className="col-sm-2" style={hiddenstyle}>
+              <span className="text-light">Sign Up</span>
+            </div>
+            {isComponentVisible && (
+              <div className="col-4">
+                <a onClick={toggleDrawer}>
+                  <img className="hamBurger" src={HamBar}></img>
+                </a>
+              </div>
+            )}
+            {openSideDrawer && (
+              <div className="sideNav">
+                <div
+                  className="dropdownSidebar"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <ul className="p-0 px-3 roleList">
+                    <li>
+                      <a href="#">Student</a>
+                    </li>
+                    <li>
+                      <a href="#">Educator</a>
+                    </li>
+                    <li>
+                      <a href="#">School</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Header;
