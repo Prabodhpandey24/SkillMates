@@ -4,11 +4,7 @@ import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
 
 const Header = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+ 
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -51,6 +47,39 @@ const Header = () => {
     setOpenSideMenu(!openSideDrawer);
   };
 
+
+// Search result perform
+const [searchResult, setSearchResult] = useState([]);
+const [key, setKey] = useState("");
+
+useEffect(() => {
+  const search = async () => {
+    try {
+      if (!key.trim()) {
+        setSearchResult([]);
+        return;
+      }
+      const params = new URLSearchParams({ key, limit: 5 });
+      const res = await fetch(`http://localhost:5000/api/v1/courses?${params}`);
+      const data = await res.json();
+      setSearchResult(data);
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  search();
+}, [key]);
+
+
+
+
+
+
+
+
+
   return (
     <div className="container-fluid p-0">
       <div className="py-3 navbarShadow">
@@ -64,8 +93,8 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Find Courses"
-                value={searchTerm}
-                onChange={handleInputChange}
+                value={key}
+                onChange={(e)=> setKey(e.target.value)}
                 className="searchBar"
               />
               {!isComponentVisible && (
@@ -74,6 +103,22 @@ const Header = () => {
                 </div>    
               )}
             </div>
+            {searchResult && searchResult.length > 0 && (
+              <div className="search-result">
+                {searchResult.map(course => (
+                  <div className="result-item" key={course._id}>
+                    <div className="img">
+                      <img src={course.imageUrl} alt="" />
+                    </div>
+                    <div className="course-info">
+                      <p className="name">{course.name}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+
             <div className="col-sm-1" style={hiddenstyle}>
               <a
                 href="#"

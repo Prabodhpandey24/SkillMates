@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import 'react-phone-input-2/lib/style.css';
 
 function SignUp() {
     const [name, setName] = useState("");
