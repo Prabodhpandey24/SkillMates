@@ -53,28 +53,31 @@ const Header = () => {
 
   return (
     <div className="container-fluid p-0">
-      <div className="bg-primary py-3">
+      <div className="py-3 navbarShadow">
         <div className="container">
           <div className="row">
-            <div className="col-3">
+            <div className="col-2">
               <img src=""></img>
-              <span className="text-light">Skill Mates</span>
+              <span className="">Skill Mates</span>
             </div>
-            <div className="col-5">
+            <div className="col-8 d-flex justify-content-center position-relative">
               <input
                 type="text"
                 placeholder="Find Courses"
                 value={searchTerm}
                 onChange={handleInputChange}
+                className="searchBar"
               />
               {!isComponentVisible && (
-                <img src={Search} className="searchIcon"></img>
+                <div className="searchbarDiv">
+                  <img src={Search} className="searchIcon"></img>
+                </div>    
               )}
             </div>
-            <div className="col-sm-2" style={hiddenstyle}>
+            <div className="col-sm-1" style={hiddenstyle}>
               <a
                 href="#"
-                className="text-light"
+                className=""
                 onMouseEnter={handleMouseEnter}
               >
                 Log In
@@ -99,11 +102,11 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <div className="col-sm-2" style={hiddenstyle}>
-              <span className="text-light">Sign Up</span>
+            <div className="col-sm-1" style={hiddenstyle}>
+              <span className="">Sign Up</span>
             </div>
             {isComponentVisible && (
-              <div className="col-4">
+              <div className="col-2">
                 <a onClick={toggleDrawer}>
                   <img className="hamBurger" src={HamBar}></img>
                 </a>

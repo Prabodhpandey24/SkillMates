@@ -1,11 +1,16 @@
 body{
-	font-family: Poppins, sans-serif;
+	font-family: sans-serif;
 }
 
 ul{
 	text-decoration: none;
 	list-style: none;
 }
+
+.navbarShadow{
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
 
 .row{
 	align-items: center;
@@ -15,16 +20,17 @@ ul{
 	position: absolute;
 	background-color: beige;
 	display: block;
-	left: 65%;
-	top: 45px;
+	left: 80%;
+	top: 55px;
 }
 
 .roleList{
 	text-align: start;
+	
 }
 
 .roleList > li{
-	padding: 5px 0;
+	padding: 5px 10px 5px 0;
 }
 
 .hidden{
@@ -39,14 +45,31 @@ ul{
 .searchIcon{
 	height: 30px;
 	width: 30px;
+
+}
+
+.searchbarDiv{
+	position: absolute;
+	right: 20px;
+	top: 5px;
 }
 
 .dropdownSidebar{
 	position: absolute;
-	background-color: beige;
+	background-color: white;
 	display: block;
 	left: 0;
 	top: 0;
 	height: 100vh;
 	width: 60%;
+	box-shadow: 0 4px 20px 0 rgba(0,0,0,.4);
+}
+
+.searchBar{
+	width: 100%;
+	height: 40px;
+	border-radius: 5px;
+	border:0.3px solid rgb(227, 227, 227);
+	padding: 20px 15px;
+	position: relative;
 }
