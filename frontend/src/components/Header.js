@@ -103,7 +103,12 @@ const Header = () => {
               )}
             </div>
             <div className="col-sm-1" style={hiddenstyle}>
-              <span className="">Sign Up</span>
+              <a
+                href="/signup"
+                className=""
+              >
+                Sign Up
+              </a>
             </div>
             {isComponentVisible && (
               <div className="col-2">
