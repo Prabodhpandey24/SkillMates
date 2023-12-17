@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -48,7 +49,7 @@ const Header = () => {
           <Navbar.Collapse id="navbarScroll">
 
             <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-              <NavDropdown title="SignIn" id="navbarScrollingDropdown">
+              {/* <NavDropdown title="SignIn" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Student</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">Teacher</NavDropdown.Item>
                 <NavDropdown.Item href="#action5">School</NavDropdown.Item>
@@ -56,8 +57,10 @@ const Header = () => {
                 <NavDropdown.Item href="#action6">
                   Choose Your Role..
                 </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#action1">SignUp</Nav.Link>
+              </NavDropdown> */}
+              <Nav.Link as={Link} to="/signup">SignUp</Nav.Link>
+              <Nav.Link as={Link} to="/signin">SignIn</Nav.Link>
+              <Nav.Link href="#home">Logout</Nav.Link>
             </Nav>
 
           </Navbar.Collapse>
