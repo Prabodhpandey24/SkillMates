@@ -40,7 +40,6 @@
 
 .card-img-left {
   width: 45%;
-  /* Link to your background image using in the property below! */
   background: scroll center url('https://www.mckinsey.com/~/media/mckinsey/mckinsey%20quarterly/the%20five%20fifty/soft-skills-1536x1536.png');
   background-size: cover;
 }
