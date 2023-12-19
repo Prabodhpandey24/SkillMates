@@ -11,7 +11,7 @@ const Header = () => {
   const logout=()=>{
     localStorage.clear()
     console.warn("apple");
-    navigate('/signup');
+    navigate('/');
   }
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
