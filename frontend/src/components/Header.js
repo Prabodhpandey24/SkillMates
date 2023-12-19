@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
- 
+  const auth = localStorage.getItem("user");
+  const navigate = useNavigate();
+  //Logout
+  const logout=()=>{
+    localStorage.clear()
+    console.warn("apple");
+    navigate('/signup');
+  }
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -71,7 +79,6 @@ useEffect(() => {
   };
   search();
 }, [key]);
-
 
 
 
@@ -148,11 +155,25 @@ useEffect(() => {
               )}
             </div>
             <div className="col-sm-1" style={hiddenstyle}>
+              {auth ? 
+              <a href="/signup" onClick={logout}>
+                Logout
+              </a> :
               <a
                 href="/signup"
                 className=""
               >
                 Sign Up
+              </a> }
+            </div>
+
+
+            <div className="col-sm-1" style={hiddenstyle}>
+              <a
+                href="/"
+                className=""
+              >
+                Home
               </a>
             </div>
             {isComponentVisible && (

@@ -4,6 +4,7 @@ import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignUp from './components/SignUp';
 import Signin from './components/SignIn';
+import PrivateComponent from './components/PrivateComponent';
 
 function App() {
 
@@ -12,6 +13,11 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          
+          <Route element={<PrivateComponent />}>
+            <Route path="/" element={<h1>Home</h1>} />
+          </Route>
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
         </Routes>
