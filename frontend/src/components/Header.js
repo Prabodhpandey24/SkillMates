@@ -11,7 +11,6 @@ const Header = () => {
   const logout=()=>{
     localStorage.clear()
     console.warn("apple");
-    navigate('/');
   }
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -126,37 +125,18 @@ useEffect(() => {
             )}
 
 
-            <div className="col-sm-1" style={hiddenstyle}>
+            {/* <div className="col-sm-1" style={hiddenstyle}>
               <a
-                href="#"
+                href="/signin"
                 className=""
                 onMouseEnter={handleMouseEnter}
               >
                 Log In
               </a>
-              {isDropdownVisible && (
-                <div
-                  className="dropdown-content"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <ul className="p-0 px-3 roleList">
-                    <li>
-                      <a href="#">Student</a>
-                    </li>
-                    <li>
-                      <a href="#">Educator</a>
-                    </li>
-                    <li>
-                      <a href="#">School</a>
-                    </li>
-                  </ul>
-                </div>
-              )}
             </div>
             <div className="col-sm-1" style={hiddenstyle}>
               {auth ? 
-              <a href="/signup" onClick={logout}>
+              <a href="/" onClick={logout}>
                 Logout
               </a> :
               <a
@@ -165,7 +145,32 @@ useEffect(() => {
               >
                 Sign Up
               </a> }
-            </div>
+            </div> */}
+
+
+            {
+              auth ? <a href="/" onClick={logout}>Logout</a> :
+              <>
+                <div className="col-sm-1" style={hiddenstyle}>
+                  <a
+                    href="/signin"
+                    className=""
+                    onMouseEnter={handleMouseEnter}
+                  >
+                    Log In
+                  </a>
+                </div>
+
+                <div className="col-sm-1" style={hiddenstyle}>
+                  <a
+                    href="/signup"
+                    className=""
+                  >
+                    Sign Up
+                  </a> 
+                </div>
+              </>
+            }
 
 
             <div className="col-sm-1" style={hiddenstyle}>
@@ -176,6 +181,8 @@ useEffect(() => {
                 Home
               </a>
             </div>
+
+            
             {isComponentVisible && (
               <div className="col-2">
                 <a onClick={toggleDrawer}>

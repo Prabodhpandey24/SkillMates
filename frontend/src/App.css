@@ -44,6 +44,12 @@
   background-size: cover;
 }
 
+.card-img-left_login {
+  width: 45%;
+  background: scroll center url('https://www.ioprogression.com/images/landing.png');
+  background-size: cover;
+}
+
 .btn-login {
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
@@ -90,3 +96,6 @@
   font-weight: bold;
   font-size: 16px;
 }
+
+
+

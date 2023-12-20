@@ -56,6 +56,8 @@ app.post("/api/v1/signup", async (req, resp) => {
   try {
     const user = new User(req.body);
     const result = await user.save();
+    result = result.toObject();
+    delete result.password
     resp.status(201).json({ message: "User registered successfully.", data: result });
     console.log("User registered successfully.");
   } catch (error) {
@@ -64,11 +66,25 @@ app.post("/api/v1/signup", async (req, resp) => {
   }
 });
 
-//signin
-
-
-//logout
-
+//Login
+app.post("/api/v1/login", async (req, resp) => {
+  try {
+    const { email, password } = req.body;
+    if (email && password) {
+      const user = await User.findOne({ email, password }).select("-password -repassword");
+      if (user) {
+        resp.send({ email: user.email, role: user.role });
+      } else {
+        resp.status(404).send({ result: 'User not found' });
+      }
+    } else {
+      resp.status(400).send({ result: 'Missing email or password in the request body' });
+    }
+  } catch (error) {
+    console.error(error);
+    resp.status(500).send({ result: 'Internal Server Error' });
+  }
+});
 
 
 
