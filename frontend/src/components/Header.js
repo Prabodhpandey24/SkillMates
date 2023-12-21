@@ -125,29 +125,6 @@ useEffect(() => {
             )}
 
 
-            {/* <div className="col-sm-1" style={hiddenstyle}>
-              <a
-                href="/signin"
-                className=""
-                onMouseEnter={handleMouseEnter}
-              >
-                Log In
-              </a>
-            </div>
-            <div className="col-sm-1" style={hiddenstyle}>
-              {auth ? 
-              <a href="/" onClick={logout}>
-                Logout
-              </a> :
-              <a
-                href="/signup"
-                className=""
-              >
-                Sign Up
-              </a> }
-            </div> */}
-
-
             {
               auth ? <a href="/" onClick={logout}>Logout</a> :
               <>
