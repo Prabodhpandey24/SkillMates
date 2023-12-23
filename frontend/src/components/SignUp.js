@@ -108,9 +108,8 @@ function SignUp() {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-lg-10 col-xl-9 mx-auto">
           <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
             <div className="card-img-left d-none d-md-flex"></div>
             <div className="card-body p-4 p-sm-5">
@@ -151,6 +150,7 @@ function SignUp() {
                     placeholder="myphonenumber"
                     value={phoneNumber}
                     onChange={(event) => setPhoneNumber(event.target.value)}
+
                   />
                   <label htmlFor="floatingInputPhonenumber">Contact number</label>
                   <div className="text-danger">{phoneNumberError}</div>
@@ -227,7 +227,7 @@ function SignUp() {
               </form>
             </div>
           </div>
-        </div>
+      
       </div>
     </div>
   );
