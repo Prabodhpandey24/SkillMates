@@ -13,13 +13,8 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Home />
         <Routes>
-          
-          <Route element={<PrivateComponent />}>
-            <Route path="/" element={<h1>Home</h1>} />
-          </Route>
-
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
         </Routes>
