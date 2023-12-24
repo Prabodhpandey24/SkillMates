@@ -1,0 +1,16 @@
+.card-img-top{
+    height: 320px;
+  }
+  
+  .container {
+    position: relative;
+  }
+  
+  .course-card {
+    transition: transform 0.3s;
+  }
+  
+  .course-card:hover {
+    transform: scale(1.1);
+  }
+  

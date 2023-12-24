@@ -1,9 +1,11 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import Carousel from 'react-bootstrap/Carousel';
+import { Carousel } from 'react-bootstrap';
+import Homecarousal from './homecarousel/Homecarousal';
 
 const Home = () => {
+
   return (
     <div className="container mt-5">
       <div className="row">
@@ -23,7 +25,7 @@ const Home = () => {
             </span>
           </h1>
         </div>
-        <div className="col-md-6 mb-4 mt-5">
+        <div className="col-md-6 mb-4">
           <Carousel>
             <Carousel.Item>
               <img
@@ -48,6 +50,7 @@ const Home = () => {
             </Carousel.Item>
           </Carousel>
         </div>
+        <Homecarousal />
       </div>
     </div>
   );
