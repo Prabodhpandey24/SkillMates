@@ -1,33 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import TopLoadingBar from "react-top-loading-bar";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const loadingBar = useRef(null);
 
   const loginData = async () => {
-    console.warn(email, password);
-    let result = await fetch("http://localhost:5000/api/v1/login", {
-      method: "post",
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
-    console.warn(result);
-    if (result.email) {
-      localStorage.setItem("user", JSON.stringify(result));
-      navigate("/");
-    } else {
-      setErrorMessage("Enter valid Email and Password !...");
+    loadingBar.current.continuousStart(); 
+
+    try {
+      console.warn(email, password);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      let result = await fetch("http://localhost:5000/api/v1/login", {
+        method: "post",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      result = await result.json();
+      console.warn(result);
+      if (result.email) {
+        localStorage.setItem("user", JSON.stringify(result));
+        navigate("/");
+      } else {
+        setErrorMessage("Enter valid Email and Password !...");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("An error occurred while logging in.");
+    } finally {
+      loadingBar.current.complete(); 
     }
   };
 
   return (
     <div className="container-fluid">
+      <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
       <div className="row">
        
           <div className="card flex-row border-0  px-0">
