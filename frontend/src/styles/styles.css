@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@300&family=Hind&family=Oswald&family=PT+Sans:ital@1&family=Poppins:ital,wght@0,300;0,600;1,300&family=Raleway:wght@400;500&family=Roboto+Mono:ital,wght@0,700;1,300&display=swap');
+
+
 body{
-	font-family: sans-serif;
+	font-weight: 600 !important;
+	font-family: 'Raleway', sans-serif;
 }
 
 ul{
@@ -34,6 +38,8 @@ a{
 	background-color: white;
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 	top: 72px;
+	right: 13.5%;
+	z-index: 9999999;
 }
 
 .roleList > li{
@@ -58,7 +64,7 @@ a{
 .searchbarDiv{
 	position: absolute;
 	right: 20px;
-	top: 5px;
+	top: 10px;
 }
 
 .dropdownSidebar{
@@ -77,6 +83,84 @@ a{
 	height: 40px;
 	border-radius: 5px;
 	border:0.3px solid rgb(227, 227, 227);
-	padding: 20px 15px;
+	padding: 25px 15px;
 	position: relative;
 }
+
+.LogBtn{
+	border: 1px solid black;
+	padding: 10px 20px;
+	color: rgb(28, 28, 72);
+	
+}
+
+.SignBtn{
+	border: 1px solid black;
+	padding: 10px 20px;
+	background-color: rgb(28, 28, 72);
+	color: white;
+}
+
+.card-img-left {
+	width: 45%;
+	background: scroll center url('https://www.mckinsey.com/~/media/mckinsey/mckinsey%20quarterly/the%20five%20fifty/soft-skills-1536x1536.png');
+	background-size: cover;
+  }
+  
+  .card-img-left_login {
+	width: 45%;
+	background: scroll center url('https://www.ioprogression.com/images/landing.png');
+	background-size: cover;
+  }
+  
+  .btn-login {
+	font-size: 0.9rem;
+	letter-spacing: 0.05rem;
+	padding: 0.75rem 1rem;
+  }
+  
+  .btn-google {
+	color: white !important;
+	background-color: #ea4335;
+  }
+  
+  .btn-facebook {
+	color: white !important;
+	background-color: #3b5998;
+  }
+  
+  
+  /* Search Result */
+  .search-result {
+	position: absolute;
+	top: 70px;
+	left: 26%;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	padding: 0 0 0px 10px;
+	background-color: white;
+	z-index: 9999999;
+	width: 30vw;
+  }
+  
+  .result-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 5px; 
+  }
+  
+  .img img {
+	width: 50px; 
+	height: 50px; 
+	object-fit: cover;
+  }
+  
+  
+  .course-info p.name {
+	margin: 0;
+	font-weight: bold;
+	font-size: 16px;
+	padding: 20px;
+  }
+  
+  
+  

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
+import Book from "../img/book.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -83,13 +84,13 @@ const Header = () => {
   return (
     <div className="container-fluid p-0">
       <div className="py-3 navbarShadow">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
-            <div className="col-2">
+            <div className="col-3">
               <img src=""></img>
               <span className="">Skill Mates</span>
             </div>
-            <div className="col-8 d-flex justify-content-center position-relative">
+            <div className="col-5 d-flex justify-content-center position-relative">
               <input
                 type="text"
                 placeholder="Find Courses"
@@ -103,66 +104,52 @@ const Header = () => {
                 </div>
               )}
             </div>
+
+            {auth && (
+              <div className="col-sm-2 justify-content-end" style={hiddenstyle}>
+                <a href="/" className="LogBtn" onMouseEnter={handleMouseEnter}>
+                  Profile
+                </a>
+                {isDropdownVisible && (
+                  <ul className="p-0 px-3 roleList" onMouseLeave={handleMouseLeave}>
+                    <li>
+                      <a href="#">Name</a>
+                    </li>
+                    <li>
+                      <a href="#">Your Courses</a>
+                    </li>
+                    <li>
+                      <a href="#">Order</a>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            )}
+
             {auth ? (
-              <div className="col-sm-1" style={hiddenstyle}>
-                <a href="/" onClick={logout}>
+              <div className="col-sm-2 " style={hiddenstyle}>
+                <a href="/" onClick={logout} className="SignBtn">
                   Logout
                 </a>
               </div>
             ) : (
               <>
-                <div className="col-sm-1" style={hiddenstyle}>
-                  <a
-                    href="/signin"
-                    className=""
-                    onMouseEnter={handleMouseEnter}
-                  >
+                <div
+                  className="col-sm-2 justify-content-end"
+                  style={hiddenstyle}
+                >
+                  <a href="/signin" className="LogBtn">
                     Log In
                   </a>
                 </div>
 
-                <div className="col-sm-1" style={hiddenstyle}>
-                  <a href="/signup" className="">
+                <div className="col-sm-2" style={hiddenstyle}>
+                  <a href="/signup" className="SignBtn">
                     Sign Up
                   </a>
                 </div>
               </>
             )}
-
-            {auth && (
-              <div className="col-sm-1" style={hiddenstyle}>
-                <a href="/" className="">
-                  Profile
-                </a>
-                <ul className="p-0 px-3 roleList">
-                  <li>
-                    <a href="#">Name</a>
-                  </li>
-                  <li>
-                    <a href="#">Your Courses</a>
-                  </li>
-                  <li>
-                    <a href="#">Order</a>
-                  </li>
-                </ul>
-              </div>
-            )}
-
-            {searchResult && searchResult.length > 0 && (
-              <div className="search-result">
-                {searchResult.map((course) => (
-                  <div className="result-item" key={course._id}>
-                    <div className="img">
-                      <img src={course.imageUrl} alt="" />
-                    </div>
-                    <div className="course-info">
-                      <p className="name">{course.name}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
             {isComponentVisible && (
               <div className="col-2">
                 <a onClick={toggleDrawer}>
@@ -194,6 +181,22 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {searchResult && searchResult.length > 0 && (
+        <div className="col-5">
+          <div className="search-result">
+            {searchResult.map((course) => (
+              <div className="result-item" key={course._id}>
+                <div className="img">
+                  <img src={Book} alt="" />
+                </div>
+                <div className="course-info">
+                  <p className="name">{course.name}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
