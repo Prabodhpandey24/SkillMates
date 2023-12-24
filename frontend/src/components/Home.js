@@ -10,11 +10,13 @@ const Home = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6 mb-4">
-          <h1 style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'normal' }}>
-            Life is simple{' '}
+          <h2 className='fw-bold fs-5'>"Unlocking the future of learning, one byte at a time.<br /> Embrace the digital revolution with Us..."</h2>
+          <h1 style={{ paddingTop: '2rem', margin: 'auto 0', fontWeight: 'normal' }}>
+            Make your Life <br/>{' '}
             <span style={{ color: 'red', fontWeight: 'bold' }}>
+            &lt;
               <Typewriter
-                words={['Eat', 'Sleep', 'Code', 'Repeat!']}
+                words={['Better', 'Simple', 'Knowledgeable', 'Precious!']}
                 loop={5}
                 cursor
                 cursorStyle="!"
@@ -22,6 +24,7 @@ const Home = () => {
                 deleteSpeed={100}
                 delaySpeed={2000}
               />
+            &gt;
             </span>
           </h1>
         </div>
