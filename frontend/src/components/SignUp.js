@@ -114,7 +114,7 @@ function SignUp() {
           <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
             <div className="card-img-left d-none d-md-flex"></div>
             <div className="card-body p-4 p-sm-5">
-              <h5 className="card-title text-center mb-5 fw-light fs-5">Register</h5>
+              <h3 className="card-title text-center mb-5 fw-bold fs-5">Register</h3>
               <form>
                 <select
                   className="form-select mb-4"
