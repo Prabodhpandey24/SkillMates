@@ -123,7 +123,7 @@ function SignUp() {
                   onChange={(e) => setSelectedRole(e.target.value)}
                 >
                   <option value="" disabled>
-                    Please Choose your role here
+                     Please Choose your role here
                   </option>
                   <option value="School">School</option>
                   <option value="Teacher">Teacher</option>
@@ -170,45 +170,32 @@ function SignUp() {
                   <div className="text-danger">{emailError}</div>
                 </div>
 
-                <div className="form-floating mb-3">
-                  <div className="input-group">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="form-control"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button
+               
+
+                <div className="form-floating d-flex mb-3">
+                  <input type={showPassword ? "text" : "password"} className="form-control" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <button
                       type="button"
-                      className="btn btn-link"
+                      className="btn btn-light"
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? "Hide" : "Show"}
                     </button>
-                  </div>
-                  <label className="p-2" htmlFor="floatingPassword">Password</label>
+                  <label htmlFor="floatingPassword">Password</label>
                   <div className="text-danger">{passwordError}</div>
                 </div>
 
-                <div className="form-floating mb-3">
-                  <div className="input-group">
-                    <input
-                      type={showRepassword ? "text" : "password"}
-                      className="form-control"
-                      id="repassword"
-                      value={repassword}
-                      onChange={(e) => setRepassword(e.target.value)}
-                    />
-                    <button
+
+                <div className="form-floating d-flex mb-3">
+                  <input type={showRepassword ? "text" : "password"} className="form-control" id="repassword" placeholder="Confirm Password"  value={repassword} onChange={(e) => setRepassword(e.target.value)}/>
+                  <button
                       type="button"
-                      className="btn btn-link"
+                      className="btn btn-light"
                       onClick={toggleRepasswordVisibility}
                     >
                       {showRepassword ? "Hide" : "Show"}
                     </button>
-                  </div>
-                  <label className="p-2" htmlFor="floatingPasswordConfirm">Confirm Password</label>
+                  <label htmlFor="floatingPasswordConfirm">Confirm Password</label>
                   <div className="text-danger">{repasswordError}</div>
                 </div>
 
