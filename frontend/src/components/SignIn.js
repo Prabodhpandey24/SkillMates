@@ -27,15 +27,19 @@ function SignIn() {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-lg-10 col-xl-9 mx-auto">
-          <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
-            <div className="card-img-left_login d-none d-md-flex"></div>
-            <div className="card-body p-4 p-sm-5">
-              <h3 className="card-title text-center mb-3 fw-light fs-5">Log In</h3>
-              <h5 className="card-title text-center mb-5 fw-light fs-4">
-                Welcome to Skill Mates
+       
+          <div className="card flex-row border-0  px-0">
+            <div className="col-sm-7">
+              <img src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg" className="card-img-left-login"></img>
+            </div>  
+            <div className="col-sm-5">
+            <div className="card-body d-flex align-items-center px-5">
+              <div style={{width: "100%", textAlign:"start"}}>
+              <h3 className="">Welcome to Skill Mates</h3>
+              <h5 className="py-4">
+                Get Onboard and jumpstart your career!
               </h5>
               <form>
                 <div className="form-floating mb-3">
@@ -61,28 +65,26 @@ function SignIn() {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
-
                 {errorMessage && (
                   <p className="text-danger">{errorMessage}</p>
                 )}
-
-                <div className="d-grid mb-2">
+                <div className="d-grid mb-2 ">
                   <button
-                    className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
+                    className="LogInSubmitBtn text-uppercase "
                     type="button"
                     onClick={loginData}
                   >
                     LogIn
                   </button>
                 </div>
-
                 <a className="d-block text-center mt-2 small" href="/signup">
                   Don't have an account? Register
                 </a>
               </form>
+              </div>
+            </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );

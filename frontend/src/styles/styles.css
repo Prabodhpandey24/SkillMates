@@ -17,6 +17,7 @@ a{
 
 .navbarShadow{
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	border-bottom: 0.2px solid  rgb(28, 28, 72);
 }
 
 
@@ -107,10 +108,10 @@ a{
 	background-size: cover;
   }
   
-  .card-img-left_login {
-	width: 45%;
-	background: scroll center url('https://www.ioprogression.com/images/landing.png');
+  .card-img-left-login {
 	background-size: cover;
+	width: 100%;
+	height: 100%;
   }
   
   .btn-login {
@@ -134,9 +135,8 @@ a{
   .search-result {
 	position: absolute;
 	top: 70px;
-	left: 27%;
+	left: 26%;
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-	padding: 0 0 0px 10px;
 	background-color: white;
 	z-index: 9999999;
 	width: 37vw;
@@ -145,7 +145,7 @@ a{
   .result-item {
 	display: flex;
 	align-items: center;
-	margin-bottom: 5px; 
+	border-bottom: 1px solid rgb(218, 218, 218);
   }
   
   .img img {
@@ -162,5 +162,17 @@ a{
 	padding: 20px;
   }
   
-  
-  
+  .card-body{
+	height: 100%;
+  }
+
+
+.LogInSubmitBtn{
+	border: 1px solid black;
+	padding: 10px 20px;
+	background-color: rgb(28, 28, 72);
+	color: white;
+	padding: 10px;
+	font-weight: 600;
+}
+

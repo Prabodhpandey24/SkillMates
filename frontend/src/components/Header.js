@@ -187,7 +187,7 @@ const Header = () => {
             {searchResult.map((course) => (
               <div className="result-item" key={course._id}>
                 <div className="img">
-                  <img src={course.imageUrl} alt="" />
+                  <img src={Book} alt="" />
                 </div>
                 <div className="course-info">
                   <p className="name">{course.name}</p>

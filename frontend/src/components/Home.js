@@ -17,10 +17,10 @@ const Home = () => {
                 words={['Eat', 'Sleep', 'Code', 'Repeat!']}
                 loop={5}
                 cursor
-                cursorStyle="_"
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
+                cursorStyle="!"
+                typeSpeed={100}
+                deleteSpeed={100}
+                delaySpeed={2000}
               />
             </span>
           </h1>
