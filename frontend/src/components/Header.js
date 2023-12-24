@@ -8,10 +8,10 @@ const Header = () => {
   const auth = localStorage.getItem("user");
   const navigate = useNavigate();
   //Logout
-  const logout=()=>{
-    localStorage.clear()
+  const logout = () => {
+    localStorage.clear();
     console.warn("apple");
-  }
+  };
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -54,37 +54,31 @@ const Header = () => {
     setOpenSideMenu(!openSideDrawer);
   };
 
+  // Search result perform
+  const [searchResult, setSearchResult] = useState([]);
+  const [key, setKey] = useState("");
 
-// Search result perform
-const [searchResult, setSearchResult] = useState([]);
-const [key, setKey] = useState("");
+  useEffect(() => {
+    const search = async () => {
+      try {
+        if (!key.trim()) {
+          setSearchResult([]);
+          return;
+        }
+        const params = new URLSearchParams({ key, limit: 5 });
+        const res = await fetch(
+          `http://localhost:5000/api/v1/courses?${params}`
+        );
+        const data = await res.json();
+        setSearchResult(data);
 
-useEffect(() => {
-  const search = async () => {
-    try {
-      if (!key.trim()) {
-        setSearchResult([]);
-        return;
+        console.log(data);
+      } catch (error) {
+        console.error(error);
       }
-      const params = new URLSearchParams({ key, limit: 5 });
-      const res = await fetch(`http://localhost:5000/api/v1/courses?${params}`);
-      const data = await res.json();
-      setSearchResult(data);
-
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  search();
-}, [key]);
-
-
-
-
-
-
-
+    };
+    search();
+  }, [key]);
 
   return (
     <div className="container-fluid p-0">
@@ -100,33 +94,22 @@ useEffect(() => {
                 type="text"
                 placeholder="Find Courses"
                 value={key}
-                onChange={(e)=> setKey(e.target.value)}
+                onChange={(e) => setKey(e.target.value)}
                 className="searchBar"
               />
               {!isComponentVisible && (
                 <div className="searchbarDiv">
                   <img src={Search} className="searchIcon"></img>
-                </div>    
+                </div>
               )}
             </div>
-            {searchResult && searchResult.length > 0 && (
-              <div className="search-result">
-                {searchResult.map(course => (
-                  <div className="result-item" key={course._id}>
-                    <div className="img">
-                      <img src={course.imageUrl} alt="" />
-                    </div>
-                    <div className="course-info">
-                      <p className="name">{course.name}</p>
-                    </div>
-                  </div>
-                ))}
+            {auth ? (
+              <div className="col-sm-1" style={hiddenstyle}>
+                <a href="/" onClick={logout}>
+                  Logout
+                </a>
               </div>
-            )}
-
-
-            {
-              auth ? <a href="/" onClick={logout}>Logout</a> :
+            ) : (
               <>
                 <div className="col-sm-1" style={hiddenstyle}>
                   <a
@@ -139,27 +122,47 @@ useEffect(() => {
                 </div>
 
                 <div className="col-sm-1" style={hiddenstyle}>
-                  <a
-                    href="/signup"
-                    className=""
-                  >
+                  <a href="/signup" className="">
                     Sign Up
-                  </a> 
+                  </a>
                 </div>
               </>
-            }
+            )}
 
+            {auth && (
+              <div className="col-sm-1" style={hiddenstyle}>
+                <a href="/" className="">
+                  Profile
+                </a>
+                <ul className="p-0 px-3 roleList">
+                  <li>
+                    <a href="#">Name</a>
+                  </li>
+                  <li>
+                    <a href="#">Your Courses</a>
+                  </li>
+                  <li>
+                    <a href="#">Order</a>
+                  </li>
+                </ul>
+              </div>
+            )}
 
-            <div className="col-sm-1" style={hiddenstyle}>
-              <a
-                href="/"
-                className=""
-              >
-                Home
-              </a>
-            </div>
+            {searchResult && searchResult.length > 0 && (
+              <div className="search-result">
+                {searchResult.map((course) => (
+                  <div className="result-item" key={course._id}>
+                    <div className="img">
+                      <img src={course.imageUrl} alt="" />
+                    </div>
+                    <div className="course-info">
+                      <p className="name">{course.name}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
-            
             {isComponentVisible && (
               <div className="col-2">
                 <a onClick={toggleDrawer}>

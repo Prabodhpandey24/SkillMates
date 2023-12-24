@@ -7,6 +7,10 @@ ul{
 	list-style: none;
 }
 
+a{
+	text-decoration: none !important;
+}
+
 .navbarShadow{
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
@@ -26,7 +30,10 @@ ul{
 
 .roleList{
 	text-align: start;
-	
+	position: absolute;
+	background-color: white;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	top: 72px;
 }
 
 .roleList > li{
