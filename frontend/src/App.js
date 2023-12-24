@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SignUp from './components/SignUp';
 import Signin from './components/SignIn';
 import PrivateComponent from './components/PrivateComponent';
+import Home from './components/Home';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     <div className="App">
       <Router>
         <Header />
+        <Home />
         <Routes>
           
           <Route element={<PrivateComponent />}>

@@ -43,12 +43,13 @@ function SignUp() {
       setNameError("");
     }
 
-    if (!phoneNumber || !/^\d{10}$/.test(phoneNumber)) {
-      setPhoneNumberError("Phone number must be 10 digits");
+    if (!phoneNumber || !/^\d{10}$/.test(phoneNumber) || phoneNumber.length !== 10) {
+      setPhoneNumberError("Phone number must be exactly 10 digits");
       isValid = false;
     } else {
       setPhoneNumberError("");
     }
+    
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setEmailError("Enter a valid email address");
