@@ -7,9 +7,10 @@ import Homecarousal from './homecarousel/Homecarousal';
 const Home = () => {
 
   return (
-    <div className="container mt-5">
+    <div>
+    <div className="container my-5">
       <div className="row">
-        <div className="col-md-6 mb-4">
+        <div className="col-md-7">
           <h2 className='fw-bold fs-5'>"Unlocking the future of learning, one byte at a time.<br /> Embrace the digital revolution with Us..."</h2>
           <h1 style={{ paddingTop: '2rem', margin: 'auto 0', fontWeight: 'normal' }}>
             Make your Life <br/>{' '}
@@ -27,9 +28,9 @@ const Home = () => {
             &gt;
             </span>
           </h1>
-          <button className='explore_more mt-4'>Our Cources</button>
+          <button className='explore_more mt-4'>Explore Cources</button>
         </div>
-        <div className="col-md-6 mb-4">
+        <div className="col-md-5 mb-4">
           <Carousel>
             <Carousel.Item>
               <img
@@ -54,8 +55,9 @@ const Home = () => {
             </Carousel.Item>
           </Carousel>
         </div>
-        <Homecarousal />
       </div>
+    </div>
+    <Homecarousal />
     </div>
   );
 };

@@ -1,180 +1,201 @@
-@import url('https://fonts.googleapis.com/css2?family=Asap:wght@300&family=Hind&family=Oswald&family=PT+Sans:ital@1&family=Poppins:ital,wght@0,300;0,600;1,300&family=Raleway:wght@400;500&family=Roboto+Mono:ital,wght@0,700;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Asap:wght@300&family=Hind&family=Oswald&family=PT+Sans:ital@1&family=Poppins:ital,wght@0,300;0,600;1,300&family=Raleway:wght@400;500&family=Roboto+Mono:ital,wght@0,700;1,300&display=swap");
 
-
-body{
-	font-weight: 600 !important;
-	font-family: 'Raleway', sans-serif;
+body {
+  font-weight: 600 !important;
+  font-family: "Raleway", sans-serif;
 }
 
-ul{
-	text-decoration: none;
-	list-style: none;
+ul {
+  text-decoration: none;
+  list-style: none;
 }
 
-a{
-	text-decoration: none !important;
+a {
+  text-decoration: none !important;
 }
 
-.navbarShadow{
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-	border-bottom: 0.2px solid  rgb(28, 28, 72);
+.navbarShadow {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 0.2px solid rgb(28, 28, 72);
 }
 
-
-.row{
-	align-items: center;
+.row {
+  align-items: center;
 }
 
-.dropdown-content{
-	position: absolute;
-	background-color: beige;
-	display: block;
-	left: 80%;
-	top: 55px;
+.dropdown-content {
+  position: absolute;
+  background-color: beige;
+  display: block;
+  left: 80%;
+  top: 55px;
 }
 
-.roleList{
-	text-align: start;
-	position: absolute;
-	background-color: white;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-	top: 72px;
-	right: 13.5%;
-	z-index: 9999999;
+.roleList {
+  text-align: start;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  top: 72px;
+  right: 13.5%;
+  z-index: 9999999;
 }
 
-.roleList > li{
-	padding: 5px 10px 5px 0;
+.roleList > li {
+  padding: 5px 10px 5px 0;
 }
 
-.hidden{
-	display: none;
+.hidden {
+  display: none;
 }
 
-.hamBurger{
-	height: 40px;
-	width: 40px;
+.hamBurger {
+  height: 40px;
+  width: 40px;
 }
 
-.searchIcon{
-	height: 30px;
-	width: 30px;
-
+.searchIcon {
+  height: 30px;
+  width: 30px;
 }
 
-.searchbarDiv{
-	position: absolute;
-	right: 20px;
-	top: 10px;
+.searchbarDiv {
+  position: absolute;
+  right: 20px;
+  top: 10px;
 }
 
-.dropdownSidebar{
-	position: absolute;
-	background-color: white;
-	display: block;
-	left: 0;
-	top: 0;
-	height: 100vh;
-	width: 60%;
-	box-shadow: 0 4px 20px 0 rgba(0,0,0,.4);
+.dropdownSidebar {
+  position: absolute;
+  background-color: white;
+  display: block;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 60%;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
-.searchBar{
-	width: 100%;
-	height: 40px;
-	border-radius: 5px;
-	border:0.3px solid rgb(227, 227, 227);
-	padding: 25px 15px;
-	position: relative;
+.searchBar {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 0.3px solid rgb(227, 227, 227);
+  padding: 25px 15px;
+  position: relative;
 }
 
-.LogBtn{
-	border: 1px solid black;
-	padding: 10px 20px;
-	color: rgb(28, 28, 72);
-	
+.LogBtn {
+  border: 1px solid black;
+  padding: 10px 20px;
+  color: rgb(28, 28, 72);
 }
 
-.SignBtn{
-	border: 1px solid black;
-	padding: 10px 20px;
-	background-color: rgb(28, 28, 72);
-	color: white;
+.SignBtn {
+  border: 1px solid black;
+  padding: 10px 20px;
+  background-color: rgb(28, 28, 72);
+  color: white;
 }
 
 .card-img-left {
-	width: 45%;
-	background: scroll center url('https://www.mckinsey.com/~/media/mckinsey/mckinsey%20quarterly/the%20five%20fifty/soft-skills-1536x1536.png');
-	background-size: cover;
-  }
-  
-  .card-img-left-login {
-	background-size: cover;
-	width: 100%;
-	height: 100%;
-  }
-  
-  .btn-login {
-	font-size: 0.9rem;
-	letter-spacing: 0.05rem;
-	padding: 0.75rem 1rem;
-  }
-  
-  .btn-google {
-	color: white !important;
-	background-color: #ea4335;
-  }
-  
-  .btn-facebook {
-	color: white !important;
-	background-color: #3b5998;
-  }
-  
-  
-  /* Search Result */
-  .search-result {
-	position: absolute;
-	top: 70px;
-	left: 26%;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-	background-color: white;
-	z-index: 9999999;
-	width: 37vw;
-  }
-  
-  .result-item {
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid rgb(218, 218, 218);
-  }
-  
-  .img img {
-	width: 50px; 
-	height: 50px; 
-	object-fit: cover;
-  }
-  
-  
-  .course-info p.name {
-	margin: 0;
-	font-weight: bold;
-	font-size: 16px;
-	padding: 20px;
-  }
-  
-  .card-body{
-	height: 100%;
-  }
+  width: 45%;
+  background: scroll center
+    url("https://www.mckinsey.com/~/media/mckinsey/mckinsey%20quarterly/the%20five%20fifty/soft-skills-1536x1536.png");
+  background-size: cover;
+}
 
+.card-img-left-login {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
 
-.LogInSubmitBtn{
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+.btn-google {
+  color: white !important;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white !important;
+  background-color: #3b5998;
+}
+
+/* Search Result */
+.search-result {
+  position: absolute;
+  top: 70px;
+  left: 26%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  z-index: 9999999;
+  width: 37vw;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+.img img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.course-info p.name {
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 20px;
+}
+
+.card-body {
+  height: 100%;
+}
+
+.LogInSubmitBtn {
+  border: 1px solid black;
+  padding: 10px 20px;
+  background-color: rgb(28, 28, 72);
+  color: white;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.showHideBtn {
 	border: 1px solid black;
 	padding: 10px 20px;
 	background-color: rgb(28, 28, 72);
 	color: white;
 	padding: 10px;
 	font-weight: 600;
+	border-radius: 0px 5px 5px 0px;
+  }
+
+.sectionHeading {
+  font-size: 30px;
+  display: flex;
+  justify-content: start;
 }
+
+.sectionHeadingLine {
+  border: 3px solid rgb(28, 28, 72);
+  width: 80px;
+  border-radius: 10px;
+}
+
+.form-select {
+  padding: 1rem 0.75rem !important;
+}
+
 
 .explore_more {
 	border: 2px solid black;
@@ -184,4 +205,4 @@ a{
 	border-radius: 10px;
 	cursor: pointer;
 	left: 0;
-  }
+}

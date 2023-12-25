@@ -35,11 +35,12 @@ const Homecarousal = () => {
   };
 
   return (
-    <div className="container">
-      <div className="d-flex">
-        <h2 className="font-weight-bold fx-5" style={{ borderBottom: '2px solid #000', cursor: 'pointer', transition: 'color 0.3s' }}>
+    <div className="container my-5">
+      <div className="py-5">
+      <h2 className="sectionHeading">
           Popular Courses
         </h2>
+        <div className='sectionHeadingLine'></div>
       </div>
       <Carousel responsive={responsive}>
         {courses.map((course) => (
@@ -50,7 +51,7 @@ const Homecarousal = () => {
               <p className="card-title">Educator: {course.educator}</p>
               <p className="card-title mt-2">Total Classes: {course.noclasses}</p>
               <p className="card-title">Discount: {course.discount}%</p>
-              <p className="card-title">Price: {course.price} ₹</p>
+              <p className="card-title">Price:  ₹{course.price}</p>
               <StarRatings
                 rating={course.rating}
                 starRatedColor="orange"
