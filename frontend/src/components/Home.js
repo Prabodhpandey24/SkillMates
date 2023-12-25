@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import Homecarousal from './homecarousel/Homecarousal';
 
@@ -27,6 +27,7 @@ const Home = () => {
             &gt;
             </span>
           </h1>
+          <button className='explore_more mt-4'>Our Cources</button>
         </div>
         <div className="col-md-6 mb-4">
           <Carousel>
