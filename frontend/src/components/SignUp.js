@@ -45,7 +45,11 @@ function SignUp() {
       setNameError("");
     }
 
-    if (!phoneNumber || !/^\d{10}$/.test(phoneNumber) || phoneNumber.length !== 10) {
+    if (
+      !phoneNumber ||
+      !/^\d{10}$/.test(phoneNumber) ||
+      phoneNumber.length !== 10
+    ) {
       setPhoneNumberError("Phone number must be exactly 10 digits");
       isValid = false;
     } else {
@@ -122,11 +126,20 @@ function SignUp() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
-          <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
-            <div className="card-img-left d-none d-md-flex"></div>
-            <div className="card-body p-4 p-sm-5">
-              <h3 className="card-title text-center mb-5 fw-bold fs-5">Register</h3>
+      <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
+        <div className="card flex-row overflow-hidden p-0">
+          <div className="col-sm-7">
+            <img
+              src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
+              className="card-img-left-login"
+            ></img>
+          </div>
+          <div className="col-sm-5">
+            <div className="card-body d-flex align-items-center px-5">
+            <div style={{width: "100%", textAlign:"start"}}>
+              <h3 className="py-4">
+              Sign up and start learning
+              </h3>
               <form>
                 <select
                   className="form-select mb-4"
@@ -135,11 +148,10 @@ function SignUp() {
                   onChange={(e) => setSelectedRole(e.target.value)}
                 >
                   <option value="" disabled>
-                     Please Choose your role here
+                    Please Choose your role here
                   </option>
-                  <option value="School">School</option>
-                  <option value="Teacher">Teacher</option>
                   <option value="Student">Student</option>
+                  <option value="Teacher">Teacher</option>
                 </select>
                 <div className="text-danger">{selectedRoleError}</div>
 
@@ -163,9 +175,10 @@ function SignUp() {
                     placeholder="myphonenumber"
                     value={phoneNumber}
                     onChange={(event) => setPhoneNumber(event.target.value)}
-
                   />
-                  <label htmlFor="floatingInputPhonenumber">Contact number</label>
+                  <label htmlFor="floatingInputPhonenumber">
+                    Contact number
+                  </label>
                   <div className="text-danger">{phoneNumberError}</div>
                 </div>
 
@@ -182,38 +195,51 @@ function SignUp() {
                   <div className="text-danger">{emailError}</div>
                 </div>
 
-               
-
                 <div className="form-floating d-flex mb-3">
-                  <input type={showPassword ? "text" : "password"} className="form-control" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                   <button
-                      type="button"
-                      className="btn btn-light"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </button>
+                    type="button"
+                    className="showHideBtn text-uppercase"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
                   <label htmlFor="floatingPassword">Password</label>
                   <div className="text-danger">{passwordError}</div>
                 </div>
 
-
                 <div className="form-floating d-flex mb-3">
-                  <input type={showRepassword ? "text" : "password"} className="form-control" id="repassword" placeholder="Confirm Password"  value={repassword} onChange={(e) => setRepassword(e.target.value)}/>
+                  <input
+                    type={showRepassword ? "text" : "password"}
+                    className="form-control"
+                    id="repassword"
+                    placeholder="Confirm Password"
+                    value={repassword}
+                    onChange={(e) => setRepassword(e.target.value)}
+                  />
                   <button
-                      type="button"
-                      className="btn btn-light"
-                      onClick={toggleRepasswordVisibility}
-                    >
-                      {showRepassword ? "Hide" : "Show"}
-                    </button>
-                  <label htmlFor="floatingPasswordConfirm">Confirm Password</label>
+                    type="button"
+                    className="showHideBtn text-uppercase"
+                    onClick={toggleRepasswordVisibility}
+                  >
+                    {showRepassword ? "Hide" : "Show"}
+                  </button>
+                  <label htmlFor="floatingPasswordConfirm">
+                    Confirm Password
+                  </label>
                   <div className="text-danger">{repasswordError}</div>
                 </div>
 
                 <div className="d-grid mb-2">
                   <button
-                    className="LogInSubmitBtn text-uppercase btn-login fw-bold text-uppercase"
+                    className="LogInSubmitBtn text-uppercase"
                     type="button"
                     onClick={collectData}
                   >
@@ -224,10 +250,11 @@ function SignUp() {
                 <a className="d-block text-center mt-2 small" href="/signin">
                   Have an account? Sign In
                 </a>
-              </form>
+              </form>    
+            </div>
             </div>
           </div>
-      
+        </div>
       </div>
     </div>
   );
