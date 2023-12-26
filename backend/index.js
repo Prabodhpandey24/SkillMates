@@ -32,7 +32,7 @@ const Course = require("./model/courses.model.js");
 //         res.status(500).json({ error: "Internal Server Error" });
 //     }
 // });
-app.get("/api/v1/courses", async (req, res) => {
+app.get("/api/v1/courses/", async (req, res) => {
     try {
         const { key, page, limit } = req.query;
         const skip = (page - 1) * limit;
@@ -49,6 +49,24 @@ app.get("/api/v1/courses", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+//Course Details api
+app.get("/api/v1/courses/:id", async (req, res) => {
+  try {
+      const courseId = req.params.id;
+      const course = await Course.findOne({ id: courseId });
+      
+      if (!course) {
+          return res.status(404).json({ error: "Course not found" });
+      }
+      
+      res.status(200).json(course);
+  } catch (error) {
+      console.error("Error in /api/v1/courses/:id:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 //signup
 const User = require("./model/user.model.js");
