@@ -45,7 +45,7 @@ const Homecarousal = () => {
       </div>
       <Carousel responsive={responsive}>
         {courses.map((course) => (
-          <Link to={`/coursedetail/${course.id}`} key={course.id}>
+          <Link to={`/courses/${course.path}`} key={course.path}>
             <div className="card course-card m-3" key={course.id} style={{ cursor: 'pointer', transition: 'transform 0.3s' }}>
               <img className="card-img-top" src={course.imageUrl} alt={course.name} />
               <div className="card-body mt-2 text-start">

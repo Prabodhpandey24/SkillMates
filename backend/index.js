@@ -51,10 +51,10 @@ app.get("/api/v1/courses/", async (req, res) => {
 });
 
 //Course Details api
-app.get("/api/v1/courses/:id", async (req, res) => {
+app.get("/api/v1/courses/:path", async (req, res) => {
   try {
-      const courseId = req.params.id;
-      const course = await Course.findOne({ id: courseId });
+      const path = req.params.path;
+      const course = await Course.findOne({ path: path });
       
       if (!course) {
           return res.status(404).json({ error: "Course not found" });
@@ -62,7 +62,7 @@ app.get("/api/v1/courses/:id", async (req, res) => {
       
       res.status(200).json(course);
   } catch (error) {
-      console.error("Error in /api/v1/courses/:id:", error);
+      console.error("Error in /api/v1/courses/:path:", error);
       res.status(500).json({ error: "Internal Server Error" });
   }
 });
