@@ -3,6 +3,8 @@ import { Typewriter } from 'react-simple-typewriter';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import Homecarousal from './homecarousel/Homecarousal';
+import LiveClasses from './homecarousel/liveClasses';
+import WhyUsPage from './homecarousel/whyUs';
 
 const Home = () => {
 
@@ -28,7 +30,7 @@ const Home = () => {
             &gt;
             </span>
           </h1>
-          <button className='explore_more mt-4'>Explore Cources</button>
+          <button className='explore_more mt-4'>Explore Courses</button>
         </div>
         <div className="col-md-5 mb-4">
           <Carousel>
@@ -58,6 +60,8 @@ const Home = () => {
       </div>
     </div>
     <Homecarousal />
+    <LiveClasses/>
+    <WhyUsPage/>
     </div>
   );
 };
