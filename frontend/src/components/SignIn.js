@@ -11,13 +11,18 @@ function SignIn() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const loadingBar = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const loginData = async () => {
     setLoading(true);
     loadingBar.current.continuousStart();
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       let result = await fetch("http://localhost:5000/api/v1/login", {
         method: "post",
         body: JSON.stringify({ email, password }),
@@ -75,15 +80,22 @@ function SignIn() {
                     <label htmlFor="floatingInputEmail">Email</label>
                   </div>
 
-                  <div className="form-floating mb-3">
+                  <div className="form-floating d-flex mb-3">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       className="form-control"
                       id="password"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
+                    <button
+                      type="button"
+                      className="showHideBtn text-uppercase"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </button>
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
                   {errorMessage && (

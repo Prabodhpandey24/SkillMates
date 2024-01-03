@@ -3,7 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import StarRatings from 'react-star-ratings';
 import '../homecarousel/Homecarousal.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
 
@@ -14,10 +14,24 @@ const Homecarousal = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/v1/courses')
-      .then((response) => response.json())
-      .then((data) => setCourses(data))
-      .catch((error) => console.error('Error fetching data:', error));
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setLoadingProgress(0);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const response = await fetch('http://localhost:5000/api/v1/courses');
+        const data = await response.json();
+
+        setCourses(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleCourseClick = (path) => {
@@ -67,7 +81,7 @@ const Homecarousal = () => {
             key={course.path}
             className="card course-card m-3"
             style={{ cursor: 'pointer', transition: 'transform 0.3s' }}
-            onClick={() => handleCourseClick(course.path)} // Move the onClick handler to the entire card
+            onClick={() => handleCourseClick(course.path)}
           >
             <img
               className="card-img-top"

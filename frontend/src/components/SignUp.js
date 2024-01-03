@@ -107,7 +107,7 @@ function SignUp() {
           repassword,
           selectedRole
         );
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         let result = await fetch("http://localhost:5000/api/v1/signup", {
           method: "post",
           body: JSON.stringify({
@@ -122,7 +122,7 @@ function SignUp() {
             "Content-Type": "application/json",
           },
         });
-
+         
         result = await result.json();
         console.warn(result);
         localStorage.setItem("user", JSON.stringify(result));
