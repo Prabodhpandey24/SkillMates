@@ -91,7 +91,7 @@ app.post("/api/v1/login", async (req, resp) => {
     if (email && password) {
       const user = await User.findOne({ email, password }).select("-password -repassword");
       if (user) {
-        resp.send({ email: user.email, role: user.role });
+        resp.send({ email: user.email, role: user.role, username: user.name });
       } else {
         resp.status(404).send({ result: 'User not found' });
       }
@@ -103,9 +103,6 @@ app.post("/api/v1/login", async (req, resp) => {
     resp.status(500).send({ result: 'Internal Server Error' });
   }
 });
-
-
-
 
 
 

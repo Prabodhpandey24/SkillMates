@@ -26,6 +26,7 @@ function SignIn() {
         },
       });
       result = await result.json();
+      console.warn(result);
       if (result.email) {
         localStorage.setItem("user", JSON.stringify(result));
         navigate("/");

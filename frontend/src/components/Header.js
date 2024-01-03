@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const auth = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate();
   //Logout
   const logout = () => {
@@ -113,7 +115,7 @@ const Header = () => {
                 {isDropdownVisible && (
                   <ul className="p-0 px-3 roleList" onMouseLeave={handleMouseLeave}>
                     <li>
-                      <a href="#">Name</a>
+                      <a href="#">{user.username}</a>
                     </li>
                     <li>
                       <a href="#">Your Courses</a>
