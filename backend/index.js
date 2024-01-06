@@ -4,6 +4,8 @@ const cors = require("cors")
 
 const connectMongoDB = require('./db.js')
 
+const jwt = require('jsonwebtoken'); // Add this line
+
 const app = express();
 
 require("dotenv").config()
@@ -71,40 +73,69 @@ app.get("/api/v1/courses/:path", async (req, res) => {
 //signup
 const User = require("./model/user.model.js");
 app.post("/api/v1/signup", async (req, resp) => {
-  try {
-    const user = new User(req.body);
-    const result = await user.save();
-    result = result.toObject();
-    delete result.password
-    resp.status(201).json({ message: "User registered successfully.", data: result });
-    console.log("User registered successfully.");
-  } catch (error) {
-    console.error(error);
-    resp.status(500).json({ error: "Internal Server Error" });
-  }
+    try {
+        const user = new User(req.body);
+        const token = await user.generateAuthToken(); // Generate and save the token
+
+        let result = await user.save();
+        result = result.toObject();
+        delete result.password;
+
+        resp.status(201).json({ message: "User registered successfully.", data: { ...result, token } });
+        console.log("User registered successfully.");
+    } catch (error) {
+        console.error(error);
+        resp.status(500).json({ error: "Internal Server Error" });
+    }
 });
+
 
 //Login
 app.post("/api/v1/login", async (req, resp) => {
-  try {
-    const { email, password } = req.body;
-    if (email && password) {
-      const user = await User.findOne({ email, password }).select("-password -repassword");
-      if (user) {
-        resp.send({ email: user.email, role: user.role, username: user.name });
-      } else {
-        resp.status(404).send({ result: 'User not found' });
-      }
-    } else {
-      resp.status(400).send({ result: 'Missing email or password in the request body' });
+    try {
+        const { email, password } = req.body;
+        if (email && password) {
+            const user = await User.findOne({ email, password }).select("-password -repassword");
+
+            if (user) {
+                // Check if the user already has an active session
+                if (user.activeSessionToken) {
+                    return resp.status(401).send({ result: 'User already logged in from another device.' });
+                }
+
+                // Proceed with the login process
+                const token = user.generateAuthToken();
+                resp.send({ token, email: user.email, role: user.role, username: user.name });
+            } else {
+                resp.status(404).send({ result: 'User not found' });
+            }
+        } else {
+            resp.status(400).send({ result: 'Missing email or password in the request body' });
+        }
+    } catch (error) {
+        console.error(error);
+        resp.status(500).send({ result: 'Internal Server Error' });
     }
-  } catch (error) {
-    console.error(error);
-    resp.status(500).send({ result: 'Internal Server Error' });
-  }
 });
 
+// Protected Route
+const verifyToken = (req, res, next) => {
+    const token = req.header('x-auth-token');
 
+    if (!token) return res.status(401).send({ result: 'Access denied. No token provided.' });
+
+    try {
+        const decoded = jwt.verify(token, 'yourSecretKey');
+        req.user = decoded;
+        next();
+    } catch (ex) {
+        res.status(400).send({ result: 'Invalid token.' });
+    }
+};
+
+app.get('/api/v1/protected-route', verifyToken, (req, res) => {
+    res.json({ message: 'This is a protected route' });
+});
 
 
 const PORT = process.env.PORT || 5000
