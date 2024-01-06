@@ -15,10 +15,8 @@ const usersSchema = new Schema({
     timestamps: true
 });
 
-usersSchema.methods.generateAuthToken = async function () {
+usersSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id, email: this.email }, 'JWT_SECRET_KEY');
-    this.activeSessionToken = token;
-    await this.save(); 
     return token;
 };
 

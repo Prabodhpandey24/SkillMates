@@ -38,7 +38,6 @@ app.get("/api/v1/courses/", async (req, res) => {
     try {
         const { key, page, limit } = req.query;
         const skip = (page - 1) * limit;
-        // Check if key is a string before using it in the regex
         const regexKey = typeof key === 'string' ? key : '';
         const data = await Course.find({
             $or: [
@@ -70,15 +69,17 @@ app.get("/api/v1/courses/:path", async (req, res) => {
 });
 
 
-//signup
+// signup
 const User = require("./model/user.model.js");
 app.post("/api/v1/signup", async (req, resp) => {
     try {
         const user = new User(req.body);
-        const token = await user.generateAuthToken(); // Generate and save the token
+        const token = user.generateAuthToken();
 
-        let result = await user.save();
-        result = result.toObject();
+        user.activeSessionToken = token;
+        await user.save();
+
+        let result = user.toObject();
         delete result.password;
 
         resp.status(201).json({ message: "User registered successfully.", data: { ...result, token } });
@@ -89,25 +90,30 @@ app.post("/api/v1/signup", async (req, resp) => {
     }
 });
 
-
-//Login
+// Login
 app.post("/api/v1/login", async (req, resp) => {
     try {
         const { email, password } = req.body;
         if (email && password) {
-            const user = await User.findOne({ email, password }).select("-password -repassword");
+            const user = await User.findOne({ email });
 
-            if (user) {
-                // Check if the user already has an active session
+            if (user && user.password === password) {
                 if (user.activeSessionToken) {
-                    return resp.status(401).send({ result: 'User already logged in from another device.' });
+                    const previousToken = user.activeSessionToken;
+                    const newToken = user.generateAuthToken();
+                    user.activeSessionToken = newToken;
+                    await user.save();
+
+                    return resp.send({ token: newToken, email: user.email, role: user.role, username: user.name });
                 }
 
-                // Proceed with the login process
                 const token = user.generateAuthToken();
+                user.activeSessionToken = token;
+                await user.save();
+
                 resp.send({ token, email: user.email, role: user.role, username: user.name });
             } else {
-                resp.status(404).send({ result: 'User not found' });
+                resp.status(404).send({ result: 'User not found or incorrect password' });
             }
         } else {
             resp.status(400).send({ result: 'Missing email or password in the request body' });
@@ -121,11 +127,9 @@ app.post("/api/v1/login", async (req, resp) => {
 // Protected Route
 const verifyToken = (req, res, next) => {
     const token = req.header('x-auth-token');
-
     if (!token) return res.status(401).send({ result: 'Access denied. No token provided.' });
-
     try {
-        const decoded = jwt.verify(token, 'yourSecretKey');
+        const decoded = jwt.verify(token, 'JWT_SECRET_KEY');
         req.user = decoded;
         next();
     } catch (ex) {
@@ -134,9 +138,13 @@ const verifyToken = (req, res, next) => {
 };
 
 app.get('/api/v1/protected-route', verifyToken, (req, res) => {
-    res.json({ message: 'This is a protected route' });
+    const user = req.user;
+    if (user && user._id) {
+        res.json({ message: 'This is a protected route' });
+    } else {
+        res.status(401).send({ result: 'Access denied. Invalid user.' });
+    }
 });
-
 
 const PORT = process.env.PORT || 5000
 
