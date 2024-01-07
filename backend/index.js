@@ -4,7 +4,7 @@ const cors = require("cors")
 
 const connectMongoDB = require('./db.js')
 
-const jwt = require('jsonwebtoken'); // Add this line
+const jwt = require('jsonwebtoken');
 
 const app = express();
 

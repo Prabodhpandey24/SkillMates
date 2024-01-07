@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import LoginModal from '../Modal/LoginModal'; 
 
 const CourseDetail = () => {
   const { path } = useParams();
   const [courses, setCourses] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     console.log("path:", path);
@@ -15,6 +17,8 @@ const CourseDetail = () => {
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching course details:", error));
+
+    setShowModal(true);
   }, [path]);
 
   if (!courses || Object.keys(courses).length === 0) {
@@ -44,6 +48,7 @@ const CourseDetail = () => {
 
   return (
     <div className="container my-5">
+      {showModal && <LoginModal onClose={() => setShowModal(false)} />}
       <div className="row">
         <div className="col-lg-7">
           <div className="p-5 mt-4">
@@ -54,9 +59,8 @@ const CourseDetail = () => {
             <p className="card-title">Price: ₹{courses.price}</p>
           </div>
         </div>
-
         <div className="col-lg-5">
-        <Carousel>
+          <Carousel>
             <Carousel.Item>
               <img
                 className="d-block w-100 rounded-4"

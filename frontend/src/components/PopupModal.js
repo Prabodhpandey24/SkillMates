@@ -1,14 +1,10 @@
-import ReactModal from 'react-modal';
+import React from "react";
 
 const Popupmodal = ({ isOpen, onClose, children }) => {
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Login Popup"
-    >
-      {children}
-    </ReactModal>
+    <div>
+      Helllo....
+    </div>
   );
 };
 
