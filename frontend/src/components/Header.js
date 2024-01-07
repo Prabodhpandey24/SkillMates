@@ -115,7 +115,7 @@ const Header = () => {
                 {isDropdownVisible && (
                   <ul className="p-0 px-3 roleList" onMouseLeave={handleMouseLeave}>
                     <li>
-                      <a href="#">{user.username}</a>
+                      <a href="#">{user && user.name}</a>
                     </li>
                     <li>
                       <a href="#">Your Courses</a>

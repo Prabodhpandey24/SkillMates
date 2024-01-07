@@ -18,8 +18,13 @@ const CourseDetail = () => {
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching course details:", error));
 
-    setShowModal(true);
+    const modalTimeout = setTimeout(() => {
+      setShowModal(true);
+    }, 5000);
+    return () => clearTimeout(modalTimeout);
+    
   }, [path]);
+
 
   if (!courses || Object.keys(courses).length === 0) {
     return <p>Loading...</p>;

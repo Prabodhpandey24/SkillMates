@@ -125,7 +125,8 @@ function SignUp() {
          
         result = await result.json();
         console.warn(result);
-        localStorage.setItem("user", JSON.stringify(result));
+        // localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("user", JSON.stringify(result.data));
         navigate("/");
       } catch (error) {
         console.error("Error:", error);

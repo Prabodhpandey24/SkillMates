@@ -104,14 +104,14 @@ app.post("/api/v1/login", async (req, resp) => {
                     user.activeSessionToken = newToken;
                     await user.save();
 
-                    return resp.send({ token: newToken, email: user.email, role: user.role, username: user.name });
+                    return resp.send({ token: newToken, email: user.email, role: user.role, name: user.name });
                 }
 
                 const token = user.generateAuthToken();
                 user.activeSessionToken = token;
                 await user.save();
 
-                resp.send({ token, email: user.email, role: user.role, username: user.name });
+                resp.send({ token, email: user.email, role: user.role, name: user.name });
             } else {
                 resp.status(404).send({ result: 'User not found or incorrect password' });
             }
