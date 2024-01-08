@@ -148,15 +148,13 @@ app.get('/api/v1/protected-route', verifyToken, (req, res) => {
 });
 
 app.get('/api/v1/whyUs', async (req, res) => {
-    try{
+    try {
         const data = await WhyUs.find();
         res.status(200).json(data);
-    }
-    catch (error) {
-        console.error("Error in /api/v1/courses:", error);
+    } catch (error) {
+        console.error("Error in /api/v1/whyUs:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-
 });
 
 const PORT = process.env.PORT || 5000

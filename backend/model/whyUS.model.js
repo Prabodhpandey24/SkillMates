@@ -12,4 +12,5 @@ const whyUsSchema = new Schema({
 
 const WhyUs = mongoose.model("WhyUs", whyUsSchema);
 
+
 module.exports = WhyUs;
