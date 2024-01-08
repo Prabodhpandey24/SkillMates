@@ -188,6 +188,7 @@ function SignUp() {
                       className="form-control"
                       placeholder="myphonenumber"
                       value={phoneNumber}
+                      maxLength={10}
                       onChange={(event) => setPhoneNumber(event.target.value)}
                     />
                     <label htmlFor="floatingInputPhonenumber">

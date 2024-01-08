@@ -18,6 +18,7 @@ app.use(express.json())
 
 // course and search api
 const Course = require("./model/courses.model.js");
+const WhyUs = require("./model/whyUS.model.js");
 
 // app.get("/api/v1/courses", async (req, res) => {
 //     try {
@@ -144,6 +145,18 @@ app.get('/api/v1/protected-route', verifyToken, (req, res) => {
     } else {
         res.status(401).send({ result: 'Access denied. Invalid user.' });
     }
+});
+
+app.get('/api/v1/whyUs', async (req, res) => {
+    try{
+        const data = await WhyUs.find();
+        res.status(200).json(data);
+    }
+    catch (error) {
+        console.error("Error in /api/v1/courses:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+
 });
 
 const PORT = process.env.PORT || 5000

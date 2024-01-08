@@ -56,7 +56,7 @@ const CourseDetail = () => {
       {showModal && <LoginModal onClose={() => setShowModal(false)} />}
       <div className="row">
         <div className="col-lg-7">
-          <div className="p-5 mt-4">
+          <div className="p-5 mt-4 text-start">
             <h1 className="display-4">{courses.name}</h1>
             <p className="card-title">Name: {courses.description}</p>
             <p className="card-title">Educator: {courses.educator}</p>

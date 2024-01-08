@@ -6,6 +6,17 @@ import Home from "./img/homeIcon.png";
 
 const WhyUsPage = () => {
 
+	const [whyUs, setwhyUs] = useState({});
+
+	useEffect(() => {
+		fetch(`http://localhost:5000/api/v1/whyUs`)
+		  .then((response) => response.json())
+		  .then((data) => setwhyUs(data))
+		  .catch((error) => console.error("Error fetching course details:", error));
+	  }, []);
+
+	  console.log("jsjsjhds>>", whyUs);
+
   return (
     <div className="container my-5">
       <div className="py-5">

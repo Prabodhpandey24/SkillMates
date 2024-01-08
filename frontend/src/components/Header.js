@@ -4,10 +4,16 @@ import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
 import Book from "../img/book.png";
 import { useNavigate } from "react-router-dom";
+import LoadingOverlay from './Loader/LoadingOverlay';
+import TopLoadingBar from 'react-top-loading-bar';
+
 
 const Header = () => {
   const auth = localStorage.getItem("user");
   const user = JSON.parse(localStorage.getItem("user"));
+  const [isLoading, setLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [courses, setCourses] = useState([]);
 
   const navigate = useNavigate();
   //Logout
@@ -15,6 +21,27 @@ const Header = () => {
     localStorage.clear();
     console.warn("apple");
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setLoadingProgress(0);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const response = await fetch('http://localhost:5000/api/v1/courses');
+        const data = await response.json();
+
+        setCourses(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -83,14 +110,37 @@ const Header = () => {
     search();
   }, [key]);
 
+  const handleCourseClick = (path) => {
+    setLoading(true);
+    setLoadingProgress(0);
+
+    const interval = setInterval(() => {
+      setLoadingProgress((prev) => Math.min(prev + 10, 100));
+    }, 200);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      setLoading(false);
+      navigate(`/courses/${path}`);
+    }, 2000);
+
+    const clearSearch = () =>{
+      setSearchResult([]);
+    };
+
+    clearSearch();
+  };
+
   return (
     <div className="container-fluid p-0">
+
+<TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
       <div className="py-3 navbarShadow">
         <div className="container-fluid">
-          <div className="row">
+           <div className="row">
             <div className="col-3">
               <img src=""></img>
-              <span className="">Skill Mates</span>
+              <a className="" href="/">Skill Mates</a>
             </div>
             <div className="col-5 d-flex justify-content-center position-relative">
               <input
@@ -109,7 +159,7 @@ const Header = () => {
 
             {auth && (
               <div className="col-sm-2 justify-content-end" style={hiddenstyle}>
-                <a href="/" className="LogBtn" onMouseEnter={handleMouseEnter}>
+                <a href="#" className="LogBtn" onMouseEnter={handleMouseEnter}>
                   Profile
                 </a>
                 {isDropdownVisible && (
@@ -182,12 +232,13 @@ const Header = () => {
             )}
           </div>
         </div>
+        {isLoading && <LoadingOverlay />}
       </div>
-      {searchResult && searchResult.length > 0 && (
+  {searchResult && searchResult.length > 0 && (
         <div className="col-5">
-          <div className="search-result">
+          <div className="search-result" style={{cursor:"pointer"}}>
             {searchResult.map((course) => (
-              <div className="result-item" key={course._id}>
+              <div className="result-item" key={course.path} onClick={() => handleCourseClick(course.path)}>
                 <div className="img">
                   <img src={course.imageUrl} alt="" />
                 </div>
