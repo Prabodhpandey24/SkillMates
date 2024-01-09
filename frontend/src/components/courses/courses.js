@@ -4,12 +4,13 @@ import { Carousel } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import LoginModal from '../Modal/LoginModal'; 
+// import { useSelector } from 'react-redux';
 
 const CourseDetail = () => {
   const { path } = useParams();
   const [courses, setCourses] = useState({});
   const [showModal, setShowModal] = useState(false);
-
+  // const reduxdata = useSelector((state)=>state);
   useEffect(() => {
     console.log("path:", path);
 
@@ -53,7 +54,7 @@ const CourseDetail = () => {
 
   return (
     <div className="container my-5">
-      {showModal && <LoginModal onClose={() => setShowModal(false)} />}
+      {showModal && !localStorage.user && <LoginModal onClose={() => setShowModal(false)} />}
       <div className="row">
         <div className="col-lg-7">
           <div className="p-5 mt-4 text-start">

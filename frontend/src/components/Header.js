@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
-import Book from "../img/book.png";
+// import Book from "../img/book.png";
 import { useNavigate } from "react-router-dom";
 import LoadingOverlay from './Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
-
+// import { useDispatch } from 'react-redux';
+// import { loginSuccess, logout } from '../redux/Loginreducer';
 
 const Header = () => {
   const auth = localStorage.getItem("user");
@@ -14,11 +15,13 @@ const Header = () => {
   const [isLoading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [courses, setCourses] = useState([]);
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
   //Logout
   const logout = () => {
     localStorage.clear();
+    // dispatch(logout());
     console.warn("apple");
   };
 

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "./Loader/LoadingOverlay";
+// import { useDispatch, useSelector } from 'react-redux';
+// import { loginSuccess, logout } from '../redux/Loginreducer';
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -12,7 +14,8 @@ function SignIn() {
   const navigate = useNavigate();
   const loadingBar = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-
+  // const dispatch = useDispatch();
+  // const reduxdata = useSelector((state)=>state);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -34,7 +37,9 @@ function SignIn() {
       console.warn(result);
       if (result.email) {
         localStorage.setItem("user", JSON.stringify(result));
+        // dispatch(loginSuccess("RishuPandeyLogedin"));
         navigate("/");
+        // console.log(reduxdata);
       } else {
         setErrorMessage("Enter a valid Email and Password!...");
       }
