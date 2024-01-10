@@ -6,7 +6,8 @@ import LoadingOverlay from "./Loader/LoadingOverlay";
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginSuccess, logout } from '../redux/Loginreducer';
 
-function SignIn() {
+function SignIn({visible}) {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -52,26 +53,27 @@ function SignIn() {
     }
   };
 
+
   return (
     <div className="container-fluid">
       <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
       {loading && <LoadingOverlay />}
       <div className="row">
         <div className="card flex-row border-0  px-0">
-          <div className="col-sm-7">
-            <img
-              src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
-              className="card-img-left-login"
-              alt="Login"
-            />
-          </div>
+          {!visible && (
+            <div className="col-sm-7">
+              <img
+                src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
+                className="card-img-left-login"
+                alt="Login"
+              />
+            </div>
+          )}
           <div className="col-sm-5">
             <div className="card-body d-flex align-items-center px-5">
               <div style={{ width: "100%", textAlign: "start" }}>
                 <h3 className="">Welcome to Skill Mates</h3>
-                <h5 className="py-4">
-                  Get Onboard and jumpstart your career!
-                </h5>
+                <h5 className="py-4">Get Onboard and jumpstart your career!</h5>
                 <form>
                   <div className="form-floating mb-3">
                     <input
