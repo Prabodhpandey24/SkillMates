@@ -53,6 +53,7 @@ function SignIn({visible}) {
     }
   };
 
+  console.log("visible", visible);
 
   return (
     <div className="container-fluid">
@@ -69,7 +70,7 @@ function SignIn({visible}) {
               />
             </div>
           )}
-          <div className="col-sm-5">
+          <div className={visible ? "col-sm-12" : "col-sm-5"}>
             <div className="card-body d-flex align-items-center px-5">
               <div style={{ width: "100%", textAlign: "start" }}>
                 <h3 className="">Welcome to Skill Mates</h3>
