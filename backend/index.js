@@ -68,7 +68,15 @@ app.get("/api/v1/courses/:path", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+//classes api
+app.get("/api/v1/classes", async (req, res) => {
+    try {
+        const classes = await Class.find();
+        res.json(classes);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 // signup
 const User = require("./model/user.model.js");
