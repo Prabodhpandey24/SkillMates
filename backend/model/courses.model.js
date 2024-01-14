@@ -11,8 +11,20 @@ const coursesSchema = new Schema({
     imageUrl: {type: String, required: true},
     discount: { type: Number, default: 0 },
     rating: { type: Number, default: 0 },
-    educator: { type: String, required: true},
-    noclasses: { type: Number, default: 0 }
+    educator:[
+        {
+            educator_name:{type: String, required: true},
+            educator_rating:{type: String, required: true},
+            about_educator:{type: String, required: true},
+            educator_experience:{type: String, required: true},
+        }
+    ],
+    f_and_q:[
+        {
+            questions:{type: String, required: true},
+            answer:{type: String, required: true}
+        }
+    ]
 }, {
     timestamps: true
 });
