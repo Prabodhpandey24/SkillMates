@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import StarRatings from 'react-star-ratings';
-import '../homecarousel/Homecarousal.css';
 import { useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
@@ -22,7 +21,7 @@ const LiveClasses = () => {
 
         const response = await fetch('http://localhost:5000/api/v1/courses');
         const data = await response.json();
-
+        console.warn("LiveClasses", data);
         setCourses(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -72,11 +71,11 @@ const LiveClasses = () => {
     <div className="container my-5">
       <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
       <div className="py-5">
-        <h2 className="sectionHeading">Live Classes</h2>
+        <h2 className="sectionHeading">Popular Courses</h2>
         <div className='sectionHeadingLine'></div>
       </div>
       <Carousel responsive={responsive}>
-        {courses.map((course) => (
+        {courses && courses.map((course) => (
           <div
             key={course.path}
             className="card course-card m-3"
@@ -90,7 +89,7 @@ const LiveClasses = () => {
             />
             <div className="card-body mt-2 text-start">
               <p className="card-title">Name: {course.name}</p>
-              <p className="card-title">Educator: {course.educator}</p>
+              <p className="card-title">Educator: {course.educator.map(ed => ed.educator_name).join(', ')}</p>
               <p className="card-title mt-2">Total Classes: {course.noclasses}</p>
               <p className="card-title">Discount: {course.discount}%</p>
               <p className="card-title">Price: ₹{course.price}</p>

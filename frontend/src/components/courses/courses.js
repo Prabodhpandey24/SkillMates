@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import LoginModal from '../Modal/LoginModal'; 
-// import { useSelector } from 'react-redux';
 
 const CourseDetail = () => {
   const { path } = useParams();
   const [courses, setCourses] = useState({});
   const [showModal, setShowModal] = useState(false);
-  // const reduxdata = useSelector((state)=>state);
+
   useEffect(() => {
     console.log("path:", path);
 
@@ -23,9 +21,7 @@ const CourseDetail = () => {
       setShowModal(true);
     }, 5000);
     return () => clearTimeout(modalTimeout);
-    
   }, [path]);
-
 
   if (!courses || Object.keys(courses).length === 0) {
     return <p>Loading...</p>;
@@ -50,8 +46,6 @@ const CourseDetail = () => {
     },
   };
 
-  console.log("courses>", courses.imageUrl)
-
   return (
     <div className="container my-5">
       {showModal && !localStorage.user && <LoginModal onClose={() => setShowModal(false)} />}
@@ -60,7 +54,7 @@ const CourseDetail = () => {
           <div className="p-5 mt-4 text-start">
             <h1 className="display-4">{courses.name}</h1>
             <p className="card-title">Name: {courses.description}</p>
-            <p className="card-title">Educator: {courses.educator}</p>
+            <p className="card-title">Educator: {courses.educator.map(ed => ed.educator_name).join(', ')}</p>
             <p className="card-title">Discount: {courses.discount}%</p>
             <p className="card-title">Price: ₹{courses.price}</p>
           </div>
