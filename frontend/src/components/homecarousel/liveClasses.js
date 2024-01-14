@@ -71,7 +71,7 @@ const LiveClasses = () => {
     <div className="container my-5">
       <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
       <div className="py-5">
-        <h2 className="sectionHeading">Popular Courses</h2>
+        <h2 className="sectionHeading">Live Classes</h2>
         <div className='sectionHeadingLine'></div>
       </div>
       <Carousel responsive={responsive}>
