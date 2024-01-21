@@ -30,7 +30,7 @@ const WhyUsPage = () => {
 			<div className='col-sm-4'  key={why._id}>
 			<div className='smallCard'>
 				<div className='mainSmallCard align-items-center'>
-					<img className="mainSmallCardIcon" src={why.imageUrl} alt="home" />
+					<img className="mainSmallCardIcon" src={Home} alt="home" />
 					<div className='text-start ps-3'>
 						<h3>{why.heading}</h3>
 						<p className='mb-0'>{why.description}</p>
