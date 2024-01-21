@@ -52,6 +52,17 @@ app.get("/api/v1/courses/", async (req, res) => {
     }
 });
 
+//Course Details added api
+app.post("/api/v1/courses", async (req, res) => {
+    try {
+      const newCourse = new Course(req.body);
+      const savedCourse = await newCourse.save();
+      res.status(201).json(savedCourse);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
 //Course Details api
 app.get("/api/v1/courses/:path", async (req, res) => {
   try {
@@ -164,6 +175,41 @@ app.get('/api/v1/whyUs', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+// Teacher API
+const Teacher = require("./model/teachers.model.js");
+
+app.post('/api/v1/teachers', async (req, res) => {
+    try {
+        const { teacher_details } = req.body;
+        
+        if (!teacher_details || !Array.isArray(teacher_details) || teacher_details.length === 0) {
+            return res.status(400).json({ error: 'Invalid data format' });
+        }
+
+        const newTeacher = new Teacher({ teacher_deatils: teacher_details });
+        await newTeacher.save();
+
+        res.status(201).json(newTeacher);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+
+
+app.get('/api/v1/teachers', async (req, res) => {
+    try {
+        const teachers = await TeacherModel.find();
+        res.json(teachers);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+
 
 const PORT = process.env.PORT || 5000
 

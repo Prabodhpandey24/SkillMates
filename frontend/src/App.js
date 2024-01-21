@@ -8,6 +8,7 @@ import Signin from './components/SignIn';
 import Home from './components/Home';
 import Courses from './components/courses/courses';
 // import store from './store'
+import Teacher from './components/teacher/Teacher';
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/courses/:path" element={<Courses />} /> 
+          <Route path="/courses/:path" element={<Courses />} />
+          <Route path="/teacher" element={<Teacher />} /> 
         </Routes>
       </Router>
     </div>

@@ -5,6 +5,7 @@ import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "./Loader/LoadingOverlay";
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginSuccess, logout } from '../redux/Loginreducer';
+import Teacher from "./teacher/Teacher";
 
 function SignIn({visible}) {
 
@@ -39,7 +40,14 @@ function SignIn({visible}) {
       if (result.email) {
         localStorage.setItem("user", JSON.stringify(result));
         // dispatch(loginSuccess("RishuPandeyLogedin"));
+        // if (result.role === "Teacher") {
+        //   console.log("Role", result.role);
+        //   navigate("/teacher");
+        // } else {
+        //   navigate("/");
+        // }
         navigate("/");
+
         // console.log(reduxdata);
       } else {
         setErrorMessage("Enter a valid Email and Password!...");
@@ -53,7 +61,7 @@ function SignIn({visible}) {
     }
   };
 
-  console.log("visible", visible);
+  // console.log("visible", visible);
 
   return (
     <div className="container-fluid">

@@ -127,7 +127,7 @@ const Header = () => {
       navigate(`/courses/${path}`);
     }, 2000);
 
-    const clearSearch = () =>{
+    const clearSearch = () => {
       setSearchResult([]);
     };
 
@@ -137,10 +137,10 @@ const Header = () => {
   return (
     <div className="container-fluid p-0">
 
-<TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
+      <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
       <div className="py-3 navbarShadow">
         <div className="container-fluid">
-           <div className="row">
+          <div className="row">
             <div className="col-3">
               <img src=""></img>
               <a className="" href="/">Skill Mates</a>
@@ -176,6 +176,11 @@ const Header = () => {
                     <li>
                       <a href="#">Order</a>
                     </li>
+                    {user && user.role === "Teacher" && (
+                      <li>
+                        <a href="/teacher">Become Educator</a>
+                      </li>
+                    )}
                   </ul>
                 )}
               </div>
@@ -237,9 +242,9 @@ const Header = () => {
         </div>
         {isLoading && <LoadingOverlay />}
       </div>
-  {searchResult && searchResult.length > 0 && (
+      {searchResult && searchResult.length > 0 && (
         <div className="col-5">
-          <div className="search-result" style={{cursor:"pointer"}}>
+          <div className="search-result" style={{ cursor: "pointer" }}>
             {searchResult.map((course) => (
               <div className="result-item" key={course.path} onClick={() => handleCourseClick(course.path)}>
                 <div className="img">
