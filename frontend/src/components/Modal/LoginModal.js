@@ -11,7 +11,7 @@ const LoginModal = ({ onClose }) => {
 
   const customStyles = {
     content: {
-      width: "30%",
+      width: "50%",
       height: "70%",
       margin: "auto",
       transition: "opacity 0.2s ease",
@@ -19,6 +19,7 @@ const LoginModal = ({ onClose }) => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      padding: "30px"
     },
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -32,6 +33,7 @@ const LoginModal = ({ onClose }) => {
       fontSize: "30px",
       borderRadius: "50%",
       transition: "background-color 0.3s ease",
+    
     },
   };
 
