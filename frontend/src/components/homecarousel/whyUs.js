@@ -6,7 +6,7 @@ import Home from "./img/homeIcon.png";
 
 const WhyUsPage = () => {
 
-	const [whyUs, setwhyUs] = useState({});
+	const [whyUs, setwhyUs] = useState([]);
 
 	useEffect(() => {
 		fetch(`http://localhost:5000/api/v1/whyUs`)
@@ -26,39 +26,20 @@ const WhyUsPage = () => {
         <div className='sectionHeadingLine'></div>
       </div>
 	  <div className='row'>
-		<div className='col-sm-4'>
+		{whyUs.map((why)=>(
+			<div className='col-sm-4'  key={why._id}>
 			<div className='smallCard'>
 				<div className='mainSmallCard align-items-center'>
-					<img className="mainSmallCardIcon" src={Home} alt="home" />
+					<img className="mainSmallCardIcon" src={why.imageUrl} alt="home" />
 					<div className='text-start ps-3'>
-						<h3>300+</h3>
-						<p className='mb-0'>Different Courses</p>
+						<h3>{why.heading}</h3>
+						<p className='mb-0'>{why.description}</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div className='col-sm-4'>
-			<div className='smallCard'>
-				<div className='mainSmallCard align-items-center'>
-					<img className="mainSmallCardIcon" src={Home} alt="home" />
-					<div className='text-start ps-3'>
-						<h3>300+</h3>
-						<p className='mb-0'>Different Courses</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div className='col-sm-4'>
-			<div className='smallCard'>
-				<div className='mainSmallCard align-items-center'>
-					<img className="mainSmallCardIcon" src={Home} alt="home" />
-					<div className='text-start ps-3'>
-						<h3>300+</h3>
-						<p className='mb-0'>Different Courses</p>
-					</div>
-				</div>
-			</div>
-		</div>
+		))}
+		
 	  </div>
     </div>
   );

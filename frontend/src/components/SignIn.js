@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "./Loader/LoadingOverlay";
+import Background1 from "../img/background2.png"
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginSuccess, logout } from '../redux/Loginreducer';
 
@@ -60,11 +61,11 @@ function SignIn({visible}) {
       <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
       {loading && <LoadingOverlay />}
       <div className="row">
-        <div className="card flex-row border-0  px-0">
+        <div className="card flex-row px-0 border-0" >
           {!visible && (
-            <div className="col-sm-7">
+            <div className="col-sm-7 align-items-center d-flex justify-content-center" style={{ borderRight: '0.2px solid rgb(28, 28, 72)'}}>
               <img
-                src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
+                src={Background1}
                 className="card-img-left-login"
                 alt="Login"
               />
