@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Courses from './components/courses/courses';
 // import store from './store'
 import Teacher from './components/teacher/Teacher';
-import Teacher_Dashboard from './components/teacher/Teacherdashboard';
+// import Teacher_Dashboard from './components/teacher/Teacherdashboard';
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/courses/:path" element={<Courses />} />
           <Route path="/teacher" element={<Teacher />} /> 
-          <Route path="/teacherdashboard" element={<Teacher_Dashboard />} /> 
+          {/* <Route path="/teacherdashboard" element={<Teacher_Dashboard />} />  */}
         </Routes>
       </Router>
     </div>

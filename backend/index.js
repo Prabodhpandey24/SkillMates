@@ -187,7 +187,7 @@ app.post('/api/v1/teachers', async (req, res) => {
             return res.status(400).json({ error: 'Invalid data format' });
         }
 
-        const newTeacher = new Teacher({ teacher_deatils: teacher_details });
+        const newTeacher = new Teacher({ teacher_deatils: teacher_details }); 
         await newTeacher.save();
 
         res.status(201).json(newTeacher);
@@ -195,6 +195,7 @@ app.post('/api/v1/teachers', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
 
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '/home/ritesh/My_Space/SkillMates/frontend/src/components/teacher/Teacher.css';
+import { useNavigate } from "react-router-dom";
 
 const Teacher = () => {
     const [showSecondDiv, setShowSecondDiv] = useState(false);
@@ -11,91 +12,16 @@ const Teacher = () => {
     const [pincode, setPincode] = useState("");
     const [wpl, setWpl] = useState("");
     const [experience, setExperience] = useState("");
+    const navigate = useNavigate();
 
-    // Add state variables for error messages
-    const [nameError, setNameError] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [mobileError, setMobileError] = useState("");
-    const [dobError, setDobError] = useState("");
-    const [addressError, setAddressError] = useState("");
-    const [pincodeError, setPincodeError] = useState("");
-    const [wplError, setWplError] = useState("");
-    const [experienceError, setExperienceError] = useState("");
+    
 
     const handleNextClick = () => {
-        if (validateForm()) {
-            setShowSecondDiv(true);
-        }
-    };
-
-    const validateForm = () => {
-        let isValid = true;
-
-        if (!fullname) {
-            setNameError("Enter valid name.");
-            isValid = false;
-        } else {
-            setNameError("");
-        }
-
-        if (!mobile || !/^\d{10}$/.test(mobile) || mobile.length !== 10) {
-            setMobileError("Enter valid Phone number.");
-            isValid = false;
-        } else {
-            setMobileError("");
-        }
-
-        if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-            setEmailError("Enter a valid email id.");
-            isValid = false;
-        } else {
-            setEmailError("");
-        }
-
-        if (!dob) {
-            setDobError("Enter valid Date of Birth");
-            isValid = false;
-        } else {
-            setDobError("");
-        }
-
-        if (!address) {
-            setAddressError("Enter valid Address.");
-            isValid = false;
-        } else {
-            setAddressError("");
-        }
-
-        if (!pincode || !/^\d{5}$/.test(pincode)) {
-            setPincodeError("Pincode must be exactly 5 digits");
-            isValid = false;
-        } else {
-            setPincodeError("");
-        }
-    
-        if (!wpl || !/^www\.\S+\.\S+$/.test(wpl)) {
-            setWplError("Enter a valid Work Profile Link (www.abc.com)");
-            isValid = false;
-        } else {
-            setWplError("");
-        }
-
-        if (!experience) {
-            setExperienceError("Enter valid Experience.");
-            isValid = false;
-        } else {
-            setExperienceError("");
-        }
-
-        return isValid;
+        setShowSecondDiv(true);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!validateForm()) {
-            // Stop form submission if validation fails
-            return;
-        }
 
         try {
             const teacherDetails = {
@@ -121,6 +47,7 @@ const Teacher = () => {
 
             const result = await response.json();
             console.warn(result);
+            navigate("/");
         } catch (error) {
             console.error('Error:', error);
         }
@@ -135,31 +62,25 @@ const Teacher = () => {
                         <div className="first_div">
                             <label>FullName:</label>
                             <input type="text" id="fullname" name="fullname" value={fullname} onChange={(e) => setFullName(e.target.value)} required />
-                            <div className="error">{nameError}</div>
 
                             <label>Email :</label>
                             <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                            <div className="error">{emailError}</div>
 
                             <label>Mobile :</label>
                             <input type="number" id="mobile" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} required />
-                            <div className="error">{mobileError}</div>
 
                             <label>Date of Birth:</label>
                             <input type="date" id="dob" name="dob" value={dob} onChange={(e) => setDob(e.target.value)} required />
-                            <div className="error">{dobError}</div>
 
                             <label>Address:</label>
                             <input type="text" id="text" name="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
-                            <div className="error">{addressError}</div>
 
                             <label>Pincode :</label>
                             <input type="number" id="pincode" name="pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} required />
-                            <div className="error">{pincodeError}</div>
-
+                            
                             <label>Work Profile Link :</label>
                             <input type="text" id="wpl" name="wpl" value={wpl} onChange={(e) => setWpl(e.target.value)} required />
-                            <div className="error">{wplError}</div>
+                            
                         </div>
                     )}
 
@@ -173,7 +94,6 @@ const Teacher = () => {
                                 <option value="5-10 Year">5-10 Year</option>
                                 <option value="10-20 Year">10-20 Year</option>
                             </select>
-                            <div className="error">{experienceError}</div>
                         </div>
                     )}
 

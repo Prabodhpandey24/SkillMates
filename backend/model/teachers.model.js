@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const Schema = mongoose.Schema;
 
@@ -23,6 +24,7 @@ const teachersSchema = new Schema(
     }
 );
 
+teachersSchema.plugin(AutoIncrement, { inc_field: "id" });
 
 const Teacher = mongoose.model("Teacher", teachersSchema);
 
