@@ -12,44 +12,88 @@ const Teacher = () => {
     const [pincode, setPincode] = useState("");
     const [wpl, setWpl] = useState("");
     const [experience, setExperience] = useState("");
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    
+    const validateFields = () => {
+        const newErrors = {};
+
+        if (!fullname) {
+            newErrors.fullname = "Full Name is required";
+        }
+
+        if (!email) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = "Invalid email format";
+        }
+
+        if (!mobile) {
+            newErrors.mobile = "Mobile is required";
+        } else if (!/^\d{10}$/.test(mobile)) {
+            newErrors.mobile = "Invalid mobile number";
+        }
+
+        if (!dob) {
+            newErrors.dob = "Date of Birth is required";
+        }
+
+        if (!address) {
+            newErrors.address = "Address is required";
+        }
+
+        if (!pincode) {
+            newErrors.pincode = "Pincode is required";
+        } else if (!/^\d{6}$/.test(pincode)) {
+            newErrors.pincode = "Invalid pincode";
+        }
+
+        if (!wpl) {
+            newErrors.wpl = "Work Profile Link is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleNextClick = () => {
-        setShowSecondDiv(true);
+        if (validateFields()) {
+            setShowSecondDiv(true);
+        }
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const teacherDetails = {
-                teacher_details: [{
-                    fullname,
-                    email,
-                    mobile,
-                    dob,
-                    address,
-                    pincode,
-                    wpl,
-                    experience,
-                }],
-            };
+        if (validateFields()) {
+            try {
+                const teacherDetails = {
+                    teacher_details: [{
+                        fullname,
+                        email,
+                        mobile,
+                        dob,
+                        address,
+                        pincode,
+                        wpl,
+                        experience,
+                    }],
+                };
 
-            const response = await fetch('http://localhost:5000/api/v1/teachers', {
-                method: 'POST',
-                body: JSON.stringify(teacherDetails),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+                const response = await fetch('http://localhost:5000/api/v1/teachers', {
+                    method: 'POST',
+                    body: JSON.stringify(teacherDetails),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-            const result = await response.json();
-            console.warn(result);
-            navigate("/");
-        } catch (error) {
-            console.error('Error:', error);
+                const result = await response.json();
+                console.warn(result);
+                navigate("/");
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
     };
 
@@ -62,25 +106,31 @@ const Teacher = () => {
                         <div className="first_div">
                             <label>FullName:</label>
                             <input type="text" id="fullname" name="fullname" value={fullname} onChange={(e) => setFullName(e.target.value)} required />
+                            {errors.fullname && <div className="error">{errors.fullname}</div>}
 
                             <label>Email :</label>
                             <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            {errors.email && <div className="error">{errors.email}</div>}
 
                             <label>Mobile :</label>
                             <input type="number" id="mobile" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} required />
+                            {errors.mobile && <div className="error">{errors.mobile}</div>}
 
                             <label>Date of Birth:</label>
                             <input type="date" id="dob" name="dob" value={dob} onChange={(e) => setDob(e.target.value)} required />
+                            {errors.dob && <div className="error">{errors.dob}</div>}
 
                             <label>Address:</label>
-                            <input type="text" id="text" name="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+                            <input type="text" id="address" name="address" value={address} onChange={(e) => setAddress(e.target.value)} required />
+                            {errors.address && <div className="error">{errors.address}</div>}
 
                             <label>Pincode :</label>
                             <input type="number" id="pincode" name="pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} required />
-                            
+                            {errors.pincode && <div className="error">{errors.pincode}</div>}
+
                             <label>Work Profile Link :</label>
                             <input type="text" id="wpl" name="wpl" value={wpl} onChange={(e) => setWpl(e.target.value)} required />
-                            
+                            {errors.wpl && <div className="error">{errors.wpl}</div>}
                         </div>
                     )}
 
