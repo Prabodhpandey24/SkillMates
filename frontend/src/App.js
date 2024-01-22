@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Courses from './components/courses/courses';
 // import store from './store'
 import Teacher from './components/teacher/Teacher';
-import Teacher_Dashboard from './components/teacher/Teacher_Dashboard';
+import Teacher_Dashboard from './components/teacher/Teacherdashboard';
 
 function App() {
 
