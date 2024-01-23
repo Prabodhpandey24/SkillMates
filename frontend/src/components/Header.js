@@ -170,17 +170,25 @@ const Header = () => {
                     <li>
                       <a href="#">{user && user.name}</a>
                     </li>
-                    <li>
-                      <a href="#">Your Courses</a>
-                    </li>
-                    <li>
-                      <a href="#">Order</a>
-                    </li>
+
                     {user && user.role === "Teacher" && (
                       <li>
                         <a href="/teacher">Become Educator</a>
                       </li>
                     )}
+
+                    <li>
+                      <a href="/teacherdashboard">Educator Dashboard</a>
+                    </li>
+
+                    <li>
+                      <a href="#">Your Courses</a>
+                    </li>
+
+                    <li>
+                      <a href="#">Order</a>
+                    </li>
+
                   </ul>
                 )}
               </div>
