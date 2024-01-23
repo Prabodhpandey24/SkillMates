@@ -143,7 +143,7 @@ const Header = () => {
           <div className="row">
             <div className="col-3">
               <img src=""></img>
-              <a className="" href="/">Skill Mates</a>
+              <a className="logoText" href="/">Skill Mates</a>
             </div>
             <div className="col-5 d-flex justify-content-center position-relative">
               <input
@@ -151,7 +151,7 @@ const Header = () => {
                 placeholder="Find Courses"
                 value={key}
                 onChange={(e) => setKey(e.target.value)}
-                className="searchBar"
+                className="searchBar mb-0"
               />
               {!isComponentVisible && (
                 <div className="searchbarDiv">

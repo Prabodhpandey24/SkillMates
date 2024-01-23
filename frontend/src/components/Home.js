@@ -5,6 +5,7 @@ import { Carousel } from 'react-bootstrap';
 import Homecarousal from './homecarousel/Homecarousal';
 import LiveClasses from './homecarousel/liveClasses';
 import WhyUsPage from './homecarousel/whyUs';
+import RecommandedForYou from './homecarousel/recommendedForu';
 
 const Home = () => {
 
@@ -61,7 +62,9 @@ const Home = () => {
       </div>
       <Homecarousal />
       <LiveClasses />
+      <RecommandedForYou />
       <WhyUsPage />
+
     </div>
   );
 };

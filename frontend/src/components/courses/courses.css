@@ -45,3 +45,19 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.coursesSectionheading{
+	font-size: 23px;
+	color: black;
+	font-weight: 700;
+}
+
+.educatorCard{
+	background-color: white;
+	box-shadow: 1px 2px 6px 8px rgba(159, 159, 159, 0.2);
+	border-radius: 10px;
+}
+
+.bgCertification{
+	background-color: rgb(28, 28, 72);
+}

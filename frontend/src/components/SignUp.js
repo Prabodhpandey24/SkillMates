@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "./Loader/LoadingOverlay";
 import { ClipLoader } from "react-spinners";
+import Background1 from "../img/background1.png"
 
 
 function SignUp() {
@@ -143,13 +144,13 @@ function SignUp() {
         <TopLoadingBar ref={loadingBar} color="#f11946" shadow={true} />
         {loading && <LoadingOverlay />}
         <div className="card flex-row overflow-hidden p-0">
-          <div className="col-sm-7">
-            <img
-              src="https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
-              className="card-img-left-login"
-              alt="Login"
-            ></img>
-          </div>
+        <div className="col-sm-7 align-items-center d-flex justify-content-center" style={{ borderRight: '0.2px solid rgb(28, 28, 72)', backgroundColor: "aliceblue"}}>
+              <img
+                src={Background1}
+                className="card-img-left-login"
+                alt="Login"
+              />
+            </div>
           <div className="col-sm-5">
             <div className="card-body d-flex align-items-center px-5">
               <div style={{ width: "100%", textAlign: "start" }}>
