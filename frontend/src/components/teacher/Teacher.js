@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '/home/ritesh/My_Space/SkillMates/frontend/src/components/teacher/Teacher.css';
 import { useNavigate } from "react-router-dom";
+import '../teacher/Teacher.css';
 
 const Teacher = () => {
     const [showSecondDiv, setShowSecondDiv] = useState(false);

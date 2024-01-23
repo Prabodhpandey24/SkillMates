@@ -71,7 +71,7 @@ function SignIn({visible}) {
       <div className="row">
         <div className="card flex-row px-0 border-0" >
           {!visible && (
-            <div className="col-sm-7 align-items-center d-flex justify-content-center" style={{ borderRight: '0.2px solid rgb(28, 28, 72)'}}>
+            <div className="col-sm-7 align-items-center d-flex justify-content-center" style={{ borderRight: '0.2px solid rgb(28, 28, 72)', backgroundColor: "aliceblue"}}>
               <img
                 src={Background1}
                 className="card-img-left-login"
