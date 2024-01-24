@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const teacherLoginSchema = new Schema({
+const teacherloginSchema = new Schema({
     name: { type: String, required: true },
     phone_number: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    repassword: { type: String, required: true },
 	activeClassDash:[
 		{
 			serialNo: { type: String, required: true },
@@ -23,6 +22,6 @@ const teacherLoginSchema = new Schema({
 });
 
 
-const TeacherLogin = mongoose.model("TeacherLogin", usersSchema);
+const teacherlogin = mongoose.model("teacherlogin", teacherloginSchema);
 
-module.exports = TeacherLogin;
+module.exports = teacherlogin;

@@ -178,7 +178,7 @@ const Header = () => {
                     )}
 
                     <li>
-                      <a href="/teacherdashboard">Educator Dashboard</a>
+                      <a href="/edudashlogin">Educator Dashboard</a>
                     </li>
 
                     <li>

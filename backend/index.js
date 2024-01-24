@@ -196,9 +196,6 @@ app.post('/api/v1/teachers', async (req, res) => {
     }
 });
 
-
-
-
 app.get('/api/v1/teachers', async (req, res) => {
     try {
         const teachers = await TeacherModel.find();
@@ -207,6 +204,32 @@ app.get('/api/v1/teachers', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+// Teacher API for teacher dashboard login.
+const TeacherLogin = require('./model/teacherlogin.model.js'); 
+app.post("/api/v1/edudash", async (req, resp) => {
+    try {
+        if (req.body.password && req.body.email) {
+            console.log("Req Body :",req.body);
+            let eduuser = await TeacherLogin.findOne({
+                email: req.body.email,
+                password: req.body.password
+            });
+            console.log("eduuser :",eduuser);
+            if (eduuser) {
+                resp.send(eduuser);
+            } else {
+                resp.send({ result: "eduuser not found.." });
+            }
+        } else {
+            resp.send({ result: "user & password not found.." });
+        }
+    } catch (error) {
+        console.error("Error in teacher login:", error);
+        resp.status(500).send({ result: "Internal server error" });
+    }
+});
+
 
 
 
