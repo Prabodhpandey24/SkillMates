@@ -35,7 +35,7 @@ function EduDash_Login({visible}) {
       console.warn(result);
       if (result.email) {
         localStorage.setItem("Eduuser", JSON.stringify(result));
-        navigate("/");
+        navigate("/edudashboard");
       } else {
         setErrorMessage("Enter a valid Email and Password!...");
       }

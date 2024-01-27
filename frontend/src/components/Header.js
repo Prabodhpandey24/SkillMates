@@ -11,6 +11,8 @@ import TopLoadingBar from 'react-top-loading-bar';
 
 const Header = () => {
   const auth = localStorage.getItem("user");
+  const eduUserKey = localStorage.getItem("Eduuser");
+  
   const user = JSON.parse(localStorage.getItem("user"));
   const [isLoading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -178,7 +180,9 @@ const Header = () => {
                     )}
 
                     <li>
-                      <a href="/edudashlogin">Educator Dashboard</a>
+                    <a href={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
+                  Educator Dashboard
+                </a>
                     </li>
 
                     <li>

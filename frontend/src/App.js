@@ -10,6 +10,7 @@ import Courses from './components/courses/courses';
 // import store from './store'
 import Teacher from './components/teacher/Teacher';
 import EduDash_Login from './components/teacher/Edudashlogin';
+import Edudashboard from './components/teacher/Edudashboard'
 
 function App() {
 
@@ -24,7 +25,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/courses/:path" element={<Courses />} />
           <Route path="/teacher" element={<Teacher />} /> 
-          <Route path="/edudashlogin" element={<EduDash_Login />} /> 
+          <Route path="/edudashlogin" element={<EduDash_Login />} />
+          <Route path="/edudashboard" element={<Edudashboard />} /> 
         </Routes>
       </Router>
     </div>
