@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import imageUrls from '/home/ritesh/My_Space/SkillMates/frontend/src/components/teacher/user.jpeg'
 
 const Edudashboard = () => {
     const [teacherLogins, setTeacherLogins] = useState([]);
     const auth = localStorage.getItem("user");
-
+    const imageUrl = imageUrls;
     const logout = () => {
         localStorage.removeItem("Eduuser");
         console.warn("Mango");
@@ -60,6 +61,14 @@ const Edudashboard = () => {
                     </div>
                     <div className='m-3'>
                         <div className=' d-flex'>
+                            <div className='rounded-image-container me-3'>
+                                <img
+                                    src={imageUrl}
+                                    alt="User image"
+                                    style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }}
+                                    title={teacherLogins.length > 0 ? teacherLogins[0].name : ''}
+                                />
+                            </div>
                             <h5>{teacherLogins.length > 0 ? teacherLogins[0].name : ''}</h5>
                             <div className='ms-2'>
                                 <a href="/" onClick={logout}>
