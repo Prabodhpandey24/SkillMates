@@ -28,18 +28,10 @@ function App() {
           <Route path="/courses/:path" element={<Courses />} />
           <Route path="/teacher" element={<Teacher />} /> 
 
-          <Route
-            path="/edudashlogin"
-            element={<PrivateComponent />}
-          >
+          <Route path="/edudashlogin" element={<PrivateComponent />} >
             <Route index element={<EduDash_Login />} />
           </Route>
-
-
-          <Route
-            path="/edudashboard"
-            element={<PrivateEdu />}
-          >
+          <Route path="/edudashboard" element={<PrivateEdu />} >
             <Route index element={<Edudashboard />} />
           </Route>
 
