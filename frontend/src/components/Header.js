@@ -3,7 +3,7 @@ import "../styles/styles.css";
 import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
 // import Book from "../img/book.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LoadingOverlay from './Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
 // import { useDispatch } from 'react-redux';
@@ -18,6 +18,8 @@ const Header = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [courses, setCourses] = useState([]);
   // const dispatch = useDispatch();
+  const location = useLocation();
+
 
   const navigate = useNavigate();
   //Logout
@@ -140,7 +142,7 @@ const Header = () => {
     <div className="container-fluid p-0">
 
       <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
-      <div className="py-3 navbarShadow">
+      {(location.pathname !== "/edudashboard" && location.pathname !== "/edudashlogin") && (      <div className="py-3 navbarShadow">
         <div className="container-fluid">
           <div className="row">
             <div className="col-3">
@@ -254,6 +256,7 @@ const Header = () => {
         </div>
         {isLoading && <LoadingOverlay />}
       </div>
+      )}
       {searchResult && searchResult.length > 0 && (
         <div className="col-5">
           <div className="search-result" style={{ cursor: "pointer" }}>
