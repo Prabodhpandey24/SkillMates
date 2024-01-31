@@ -12,7 +12,7 @@ import TopLoadingBar from 'react-top-loading-bar';
 const Header = () => {
   const auth = localStorage.getItem("user");
   const eduUserKey = localStorage.getItem("Eduuser");
-  
+
   const user = JSON.parse(localStorage.getItem("user"));
   const [isLoading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -142,7 +142,7 @@ const Header = () => {
     <div className="container-fluid p-0">
 
       <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
-      {(location.pathname !== "/edudashboard" && location.pathname !== "/edudashlogin") && (      <div className="py-3 navbarShadow">
+      {(location.pathname !== "/edudashboard" && location.pathname !== "/edudashlogin") && (<div className="py-3 navbarShadow">
         <div className="container-fluid">
           <div className="row">
             <div className="col-3">
@@ -182,9 +182,9 @@ const Header = () => {
                     )}
 
                     <li>
-                    <a href={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
-                  Educator Dashboard
-                </a>
+                      <a href={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
+                        Educator Dashboard
+                      </a>
                     </li>
 
                     <li>

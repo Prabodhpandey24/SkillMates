@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import { Provider } from 'react-redux';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +17,7 @@ import PrivateEdu from './components/teacher/PrivateEdu';
 function App() {
 
   return (
-      
+
     <div className="App">
       <Router>
         <Header />
@@ -26,7 +26,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/courses/:path" element={<Courses />} />
-          <Route path="/teacher" element={<Teacher />} /> 
+          <Route path="/teacher" element={<Teacher />} />
 
           <Route path="/edudashlogin" element={<PrivateComponent />} >
             <Route index element={<EduDash_Login />} />
@@ -39,7 +39,7 @@ function App() {
       </Router>
     </div>
     // <Provider store={store}></Provider>
-    
+
   );
 }
 
