@@ -113,8 +113,15 @@ const Teacher = () => {
                             {errors.email && <div className="error">{errors.email}</div>}
 
                             <label>Mobile :</label>
-                            <input type="number" id="mobile" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} required />
+                            <input type="tel" id="mobile" name="mobile" value={mobile}
+                                onChange={(e) => {
+                                            const newValue = e.target.value.replace(/\D/g, '');
+                                            const limitedValue = newValue.slice(0, 10);
+                                            setMobile(limitedValue); }
+                                         }required
+                            />
                             {errors.mobile && <div className="error">{errors.mobile}</div>}
+
 
                             <label>Date of Birth:</label>
                             <input type="date" id="dob" name="dob" value={dob} onChange={(e) => setDob(e.target.value)} required />
@@ -125,7 +132,13 @@ const Teacher = () => {
                             {errors.address && <div className="error">{errors.address}</div>}
 
                             <label>Pincode :</label>
-                            <input type="number" id="pincode" name="pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} required />
+                            <input type="number" id="pincode" name="pincode" value={pincode}
+                                onChange={(e) => { const newValue = e.target.value.replace(/\D/g, '');
+                                                   const limitedValue = newValue.slice(0, 6); 
+                                                   setPincode(limitedValue);
+                                                 }
+                                         }required
+                            /> 
                             {errors.pincode && <div className="error">{errors.pincode}</div>}
 
                             <label>Work Profile Link :</label>
