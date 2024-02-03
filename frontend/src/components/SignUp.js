@@ -4,6 +4,7 @@ import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "./Loader/LoadingOverlay";
 import { ClipLoader } from "react-spinners";
 import Background1 from "../img/background1.png"
+import { Link } from 'react-router-dom';
 
 
 function SignUp() {
@@ -271,12 +272,12 @@ function SignUp() {
                     </button>
                   </div>
 
-                  <a
+                  <Link
                     className="d-block text-center mt-2 small"
-                    href="/signin"
+                    to="/signin"
                   >
                     Have an account? Sign In
-                  </a>
+                  </Link>
                 </form>
               </div>
             </div>

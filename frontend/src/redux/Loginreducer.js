@@ -2,15 +2,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'eduauth',
   initialState: {
     user: null,
     isAuthenticated: false,
+    eduauth: 'eduauth'
   },
   reducers: {
     loginSuccess: (state, action) => {
+      // console.log(action.payload);
       state.user = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.isAuthenticated = true;
     },
     logout: (state) => {

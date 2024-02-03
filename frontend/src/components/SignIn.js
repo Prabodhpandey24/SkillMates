@@ -7,6 +7,8 @@ import Background1 from "../img/background2.png"
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginSuccess, logout } from '../redux/Loginreducer';
 import Teacher from "./teacher/Teacher";
+import { Link } from 'react-router-dom';
+
 
 function SignIn({visible}) {
 
@@ -136,9 +138,9 @@ function SignIn({visible}) {
                       )}
                     </button>
                   </div>
-                  <a className="d-block text-center mt-2 small" href="/signup">
+                  <Link className="d-block text-center mt-2 small" to="/signup">
                     Don't have an account? Register
-                  </a>
+                  </Link>
                 </form>
               </div>
             </div>

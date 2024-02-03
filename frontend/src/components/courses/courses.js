@@ -70,12 +70,12 @@ const CourseDetail = () => {
             <p className="card-title pt-3 prices">₹{courses.price}</p>
           </div>
           <div className="justify-content-start d-flex">
-            <a href="#" className="LogBtn">
+            <Link href="#" className="LogBtn">
               Buy this Course
-            </a>
-            <a href="#" className="LogBtn ms-4">
+            </Link>
+            <Link href="#" className="LogBtn ms-4">
               Wishlist
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-lg-5">

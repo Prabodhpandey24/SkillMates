@@ -3,7 +3,7 @@ import "../styles/styles.css";
 import HamBar from "../img/ham.png";
 import Search from "../img/search.png";
 // import Book from "../img/book.png";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import LoadingOverlay from './Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
 // import { useDispatch } from 'react-redux';
@@ -147,7 +147,7 @@ const Header = () => {
           <div className="row">
             <div className="col-3">
               <img src=""></img>
-              <a className="logoText" href="/">Skill Mates</a>
+              <Link className="logoText" to="/">Skill Mates</Link>
             </div>
             <div className="col-5 d-flex justify-content-center position-relative">
               <input
@@ -166,33 +166,33 @@ const Header = () => {
 
             {auth && (
               <div className="col-sm-2 justify-content-end" style={hiddenstyle}>
-                <a href="#" className="LogBtn" onMouseEnter={handleMouseEnter}>
+                <Link to="#" className="LogBtn" onMouseEnter={handleMouseEnter}>
                   Profile
-                </a>
+                </Link>
                 {isDropdownVisible && (
                   <ul className="p-0 px-3 roleList" onMouseLeave={handleMouseLeave}>
                     <li>
-                      <a href="#">{user && user.name}</a>
+                      <Link to="#">{user && user.name}</Link>
                     </li>
 
                     {user && user.role === "Teacher" && (
                       <li>
-                        <a href="/teacher">Become Educator</a>
+                        <Link to="/teacher">Become Educator</Link>
                       </li>
                     )}
 
                     <li>
-                      <a href={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
+                      <Link to={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
                         Educator Dashboard
-                      </a>
+                      </Link>
                     </li>
 
                     <li>
-                      <a href="#">Your Courses</a>
+                      <Link to="#">Your Courses</Link>
                     </li>
 
                     <li>
-                      <a href="#">Order</a>
+                      <Link to="#">Order</Link>
                     </li>
 
                   </ul>
@@ -202,9 +202,9 @@ const Header = () => {
 
             {auth ? (
               <div className="col-sm-2 " style={hiddenstyle}>
-                <a href="/" onClick={logout} className="SignBtn">
+                <Link to="/" onClick={logout} className="SignBtn">
                   Logout
-                </a>
+                </Link>
               </div>
             ) : (
               <>
@@ -212,23 +212,23 @@ const Header = () => {
                   className="col-sm-2 justify-content-end"
                   style={hiddenstyle}
                 >
-                  <a href="/signin" className="LogBtn">
+                  <Link to="/signin" className="LogBtn">
                     Log In
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="col-sm-2" style={hiddenstyle}>
-                  <a href="/signup" className="SignBtn">
+                  <Link to="/signup" className="SignBtn">
                     Sign Up
-                  </a>
+                  </Link>
                 </div>
               </>
             )}
             {isComponentVisible && (
               <div className="col-2">
-                <a onClick={toggleDrawer}>
+                <Link onClick={toggleDrawer}>
                   <img className="hamBurger" src={HamBar}></img>
-                </a>
+                </Link>
               </div>
             )}
             {openSideDrawer && (
@@ -240,13 +240,13 @@ const Header = () => {
                 >
                   <ul className="p-0 px-3 roleList">
                     <li>
-                      <a href="#">Student</a>
+                      <Link to="#">Student</Link>
                     </li>
                     <li>
-                      <a href="#">Educator</a>
+                      <Link to="#">Educator</Link>
                     </li>
                     <li>
-                      <a href="#">School</a>
+                      <Link to="#">School</Link>
                     </li>
                   </ul>
                 </div>

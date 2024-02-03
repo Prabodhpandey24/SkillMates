@@ -4,6 +4,9 @@ import { ClipLoader } from "react-spinners";
 import TopLoadingBar from "react-top-loading-bar";
 import LoadingOverlay from "../Loader/LoadingOverlay";
 import Background1 from "../homecarousel/img/homeIcon.png"
+import {useSelector, useDispatch} from 'react-redux'
+import {loginSuccess} from '../../redux/Loginreducer'
+
 
 function EduDash_Login({visible}) {
 
@@ -14,6 +17,11 @@ function EduDash_Login({visible}) {
   const navigate = useNavigate();
   const loadingBar = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  // const data = useSelector(selectData=>selectData);
+  // console.log("xyxy", data.auth.user);
+
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -34,8 +42,11 @@ function EduDash_Login({visible}) {
       result = await result.json();
       console.warn(result);
       if (result.email) {
-        localStorage.setItem("Eduuser", JSON.stringify(result));
+        // localStorage.setItem("Eduuser", JSON.stringify(result));
+        dispatch(loginSuccess(email))
+        console.log("edulogin...")
         navigate("/edudashboard");
+        console.log(">>>>>>>>>>>>>>>>>>edulogin...")
       } else {
         setErrorMessage("Enter a valid Email and Password!...");
       }
@@ -107,6 +118,7 @@ function EduDash_Login({visible}) {
                       className="LogInSubmitBtn text-uppercase "
                       type="button"
                       onClick={loginData}
+                      // onClick={() => dispatch(allActions.increment())}
                       disabled={loading}
                     >
                       {loading ? (
