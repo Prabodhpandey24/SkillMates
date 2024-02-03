@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Edudashboard = () => {
     const [teacherLogins, setTeacherLogins] = useState([]);
-    const auth = localStorage.getItem("user");
+    // const auth = localStorage.getItem("user");
     const imageUrl = imageUrls;
     const dispatch = useDispatch();
     const edulogout = () => {
@@ -29,7 +29,7 @@ const Edudashboard = () => {
         <div className='d-flex mt-3'>
             <div className="flex-row">
                 <div className='container border' style={{ height: '75px' }}>
-                    <Link to=""><h3 className='mt-3'>Skill Mates</h3></Link>
+                    <Link to="/"><h3 className='mt-3'>Skill Mates</h3></Link>
                 </div>
                 <div className='container mt-3' style={{ height: '780px', width: '280px', backgroundColor: 'rgba(0,0,255,.1)' }}>
                     <div className='p-3'>

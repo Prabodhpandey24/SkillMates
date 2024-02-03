@@ -19,7 +19,7 @@ const LiveClasses = () => {
         setLoadingProgress(0);
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const response = await fetch('http://localhost:5000/api/v1/courses');
+        const response = await fetch('http://localhost:5000/api/v1/liveclasses');
         const data = await response.json();
         console.warn("LiveClasses", data);
         setCourses(data);
@@ -44,7 +44,7 @@ const LiveClasses = () => {
     setTimeout(() => {
       clearInterval(interval);
       setLoading(false);
-      navigate(`/courses/${path}`);
+      navigate(`/liveclass/${path}`);
     }, 2000);
   };
 

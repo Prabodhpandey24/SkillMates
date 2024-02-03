@@ -8,10 +8,13 @@ import LoadingOverlay from './Loader/LoadingOverlay';
 import TopLoadingBar from 'react-top-loading-bar';
 // import { useDispatch } from 'react-redux';
 // import { loginSuccess, logout } from '../redux/Loginreducer';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const auth = localStorage.getItem("user");
-  const eduUserKey = localStorage.getItem("Eduuser");
+  
+  const data = useSelector(selectData=>selectData);
+  console.log("Data", data.auth.user);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const [isLoading, setLoading] = useState(false);
@@ -182,7 +185,7 @@ const Header = () => {
                     )}
 
                     <li>
-                      <Link to={eduUserKey ? "/edudashboard" : "/edudashlogin"}>
+                      <Link to={data ? "/edudashboard" : "/edudashlogin"}>
                         Educator Dashboard
                       </Link>
                     </li>

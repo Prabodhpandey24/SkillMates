@@ -61,7 +61,7 @@ app.post("/api/v1/courses", async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+});
   
 //Course Details api
 app.get("/api/v1/courses/:path", async (req, res) => {
@@ -239,6 +239,34 @@ app.get('/api/v1/teacherlogins', async (req, res) => {
     }
   });
 
+//Liveclasses
+const Liveclass = require('./model/liveclasses.model.js'); 
+app.get("/api/v1/liveclasses", async (req, res) => {
+    try {
+      const liveClasses = await Liveclass.find();
+      res.json(liveClasses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+  
+
+app.get("/api/v1/liveclasses/:path", async (req, res) => {
+    try {
+        const path = req.params.path;
+        const liveclass = await Liveclass.findOne({ path: path });
+        
+        if (!liveclass) {
+            return res.status(404).json({ error: "Liveclass not found" });
+        }
+        
+        res.status(200).json(liveclass);
+    } catch (error) {
+        console.error("Error in /api/v1/liveclasses/:path:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 
 
