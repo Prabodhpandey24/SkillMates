@@ -21,6 +21,7 @@ const liveclassesSchema = new Schema({
     }],
     educator: [
         {
+            edu_id: { type: Number, required: true, unique: true },
             educator_name: { type: String, required: true },
             educator_rating: { type: String, required: true },
             about_educator: { type: String, required: true },

@@ -14,21 +14,36 @@ const Liveclass = () => {
     const [showModal, setShowModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [activeTab, setActiveTab] = useState("tab1");
+    const [bookingModalData, setBookingModalData] = useState({
+        courseId: null,
+        courseName: "",
+    });
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
 
-    const toggleBookingModal = () => {
+    const toggleBookingModal = (courseId, courseName) => {
         setShowBookingModal(!showBookingModal);
+        const firstEducator = courses.educator[0];
+        setBookingModalData({
+            courseId,
+            courseName,
+            edu_id: firstEducator.edu_id,
+            educator_name: firstEducator.educator_name
+        });
+        console.log("edu_id", firstEducator);
     };
+    
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/v1/liveclasses/${path}`)
             .then((response) => response.json())
-            .then((data) => setCourses(data))
+            .then((data) => {
+                setCourses(data);
+                console.log("Data", data); // Move inside the then block
+            })
             .catch((error) => console.error("Error fetching course details:", error));
-
         const modalTimeout = setTimeout(() => {
             setShowModal(true);
         }, 5000);
@@ -73,7 +88,7 @@ const Liveclass = () => {
                         <p className="card-title pt-3 prices">₹{courses.price}</p>
                     </div>
                     <div className="justify-content-start d-flex">
-                        <Link href="#" className="LogBtn" onClick={toggleBookingModal}>
+                        <Link href="#" className="LogBtn" onClick={() => toggleBookingModal(courses.id, courses.name)}>
                             Book
                         </Link>
                     </div>
@@ -104,12 +119,12 @@ const Liveclass = () => {
                     </Carousel>
                 </div>
             </div>
-            <Modal show={showBookingModal} onHide={toggleBookingModal} className="mt-5">
+            <Modal show={showBookingModal} onHide={() => toggleBookingModal(null, "")} className="mt-5">
                 <Modal.Header closeButton>
-                    <Modal.Title>Booking</Modal.Title>
+                    <Modal.Title>Booking for {bookingModalData.courseName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Booking />
+                <Booking courseId={bookingModalData.courseId} courseName={bookingModalData.courseName} edu_id={bookingModalData.edu_id} educator_name={bookingModalData.educator_name} />
                 </Modal.Body>
             </Modal>
             <div>
