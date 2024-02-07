@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.react-calendar__tile, .react-calendar__month-view__days__day{
+  color:black;
+}
+.react-calendar__navigation__label{
+  color: black;
+  font-weight: bold;
+}
+.react-calendar__navigation__arrow, .react-calendar__navigation__prev2-button{
+  color: black;
+  font-weight: bold;
+}
