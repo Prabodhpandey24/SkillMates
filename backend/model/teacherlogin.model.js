@@ -15,6 +15,12 @@ const teacherloginSchema = new Schema({
 			schoolName: { type: String, required: true },
 			classDuration: { type: String, required: true },
 			activeLink: { type: String, required: true },
+			eduId: {type: Number, require: true},
+			courseId: {type: Number, require: true},
+			educatorName: { type: String, required: true },
+			courseName: { type: String, required: true },
+			datetime: { type: String, required: true },
+			message: { type: String, required: true },
 		}
 	]
 }, {

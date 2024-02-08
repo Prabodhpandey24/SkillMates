@@ -237,6 +237,27 @@ app.get('/api/v1/teacherlogins', async (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+app.post('/api/v1/bookings', async (req, res) => {
+    try {
+      const { datetime, message } = req.body;
+      
+      // Create a new instance of TeacherLogin model
+      const teacher = new TeacherLogin({
+        activeClassDash: [{
+          datetime,
+          message
+        }]
+      });
+  
+      // Save the new document
+      await teacher.save();
+  
+      res.status(200).json({ message: 'Booking saved successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
   });
 
 //Liveclasses

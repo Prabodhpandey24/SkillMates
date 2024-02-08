@@ -12,9 +12,27 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
     setMessage(event.target.value);
   };
 
-  const handleBooking = () => {
-    // Handle booking logic here
-    console.log('Booking logic goes here');
+  const handleBooking = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          datetime: value.toISOString(),
+          message
+        }),
+      });
+      if (response.ok) {
+        console.log('Booking successful');
+        // Optionally, you can perform additional actions after successful booking
+      } else {
+        console.error('Failed to book:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error occurred while booking:', error);
+    }
   };
 
   return (
@@ -26,13 +44,13 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
         <p>Course Name: {courseName}</p>
         <p>Educator Name: {educator_name}</p>
         <div className='card-body align-item-center'>
-          <div class="form-group">
+          <div className="form-group">
             <label>Select Date</label>
             <DatePicker onChange={onChange} value={value} style={{ width: 200, color: "black" }}/>
-            <div class="form-group">
-              <label>Message</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+          </div>
+          <div className="form-group">
+            <label>Message</label>
+            <textarea className="form-control" value={message} onChange={handleInputChange} rows="3"></textarea>
           </div>
           <button className='btn btn-success mt-2' onClick={handleBooking}>Book</button>
         </div>
