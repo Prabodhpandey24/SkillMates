@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import imageUrls from '/home/ritesh/My_Space/SkillMates/frontend/src/components/teacher/user.jpeg';
+import imageUrls from '../teacher/user.jpeg';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/Loginreducer';
 import { Link } from 'react-router-dom';
