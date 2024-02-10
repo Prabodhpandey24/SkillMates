@@ -238,27 +238,6 @@ app.get('/api/v1/teacherlogins', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-app.post('/api/v1/bookings', async (req, res) => {
-    try {
-      const { datetime, message } = req.body;
-      
-      // Create a new instance of TeacherLogin model
-      const teacher = new TeacherLogin({
-        activeClassDash: [{
-          datetime,
-          message
-        }]
-      });
-  
-      // Save the new document
-      await teacher.save();
-  
-      res.status(200).json({ message: 'Booking saved successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
 
 //Liveclasses
 const Liveclass = require('./model/liveclasses.model.js'); 
@@ -288,6 +267,31 @@ app.get("/api/v1/liveclasses/:path", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+//booking api
+const Booking = require('./model/bookings.model.js');
+app.post("/api/v1/bookings", async (req, res) => {
+    try {
+        const { bookings } = req.body;
+        console.log("req")
+
+        if (!bookings || !Array.isArray(bookings) || bookings.length === 0) {
+            return res.status(400).json({ error: 'Invalid data format' });
+        }
+
+        const newBooking = new Booking({ bookings: bookings }); 
+        await newBooking.save();
+
+        res.status(201).json(newBooking);
+
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      res.status(400).json({ error: error.message });
+    }
+  });
+  
+
+
 
 
 

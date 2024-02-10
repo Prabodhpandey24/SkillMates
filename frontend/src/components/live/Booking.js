@@ -14,26 +14,32 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
 
   const handleBooking = async () => {
     try {
+      const newBooking = {
+        bookings: [{
+          eduId: edu_id,
+          courseId: courseId,
+          educatorName: educator_name,
+          courseName: courseName,
+          datetime: value.toISOString(),
+          message: message
+        }],
+      };
+  
       const response = await fetch('http://localhost:5000/api/v1/bookings', {
         method: 'POST',
+        body: JSON.stringify(newBooking),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          datetime: value.toISOString(),
-          message
-        }),
       });
-      if (response.ok) {
-        console.log('Booking successful');
-        // Optionally, you can perform additional actions after successful booking
-      } else {
-        console.error('Failed to book:', response.statusText);
-      }
+      const booking_result = await response.json();
+      console.log("booking result", booking_result);
     } catch (error) {
       console.error('Error occurred while booking:', error);
     }
   };
+  
+  
 
   return (
     <div className='container'>
