@@ -7,7 +7,9 @@ const teacherloginSchema = new Schema({
     phone_number: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-	activeClassDash:[
+	eduId: {type: Number, require: true},
+	courseId: {type: Number, require: true},
+    activeClassDash:[
 		{
 			serialNo: { type: String, required: true },
 			dateDay: { type: String, required: true },
@@ -15,8 +17,6 @@ const teacherloginSchema = new Schema({
 			schoolName: { type: String, required: true },
 			classDuration: { type: String, required: true },
 			activeLink: { type: String, required: true },
-			eduId: {type: Number, require: true},
-			courseId: {type: Number, require: true},
 			educatorName: { type: String, required: true },
 			courseName: { type: String, required: true },
 			datetime: { type: String, required: true },
@@ -31,3 +31,5 @@ const teacherloginSchema = new Schema({
 const teacherlogin = mongoose.model("teacherlogin", teacherloginSchema);
 
 module.exports = teacherlogin;
+
+// bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }]

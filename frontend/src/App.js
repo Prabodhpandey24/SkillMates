@@ -15,6 +15,7 @@ import PrivateComponent from './components/PrivateComponent';
 import PrivateEdu from './components/teacher/PrivateEdu';
 import Liveclass from './components/live/Liveclass';
 import Booking from './components/live/Booking';
+import Admindashboard from './components/admin/Admindashboard';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/teacher" element={<Teacher />} />
           <Route path="/liveclass/:path" element={<Liveclass />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/admindashboard" element={<Admindashboard />} />
 
           <Route path="/edudashlogin" element={<PrivateComponent />} >
             <Route index element={<EduDash_Login />} />

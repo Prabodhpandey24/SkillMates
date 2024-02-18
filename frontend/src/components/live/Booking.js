@@ -3,10 +3,12 @@ import DatePicker from "react-datetime-picker";
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
+import { useNavigate } from "react-router-dom";
 
 const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
   const [value, onChange] = useState(new Date());
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setMessage(event.target.value);
@@ -33,7 +35,8 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
         },
       });
       const booking_result = await response.json();
-      console.log("booking result", booking_result);
+      console.log("booking result", booking_result); 
+      navigate("/");
     } catch (error) {
       console.error('Error occurred while booking:', error);
     }

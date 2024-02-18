@@ -231,11 +231,37 @@ app.post("/api/v1/edudash", async (req, resp) => {
 });
 app.get('/api/v1/teacherlogins', async (req, res) => {
     try {
-      const teacherLogins = await TeacherLogin.find();
-      res.json(teacherLogins);
+        // Fetch teacher logins
+        const teacherLogins = await TeacherLogin.find();
+
+        // Fetch bookings
+        const bookings = await Booking.find();
+
+        // Combine data based on eduId and courseId
+        const combinedData = teacherLogins.map(teacherLogin => {
+            console.log("Teacher Login:", teacherLogin);
+            const matchingBookings = bookings.filter(booking => {
+                console.log("Booking:", booking);
+                // Access eduId and courseId from the bookings array
+                console.log("Comparing:", teacherLogin.eduId, booking.bookings[0].eduId, teacherLogin.courseId, booking.bookings[0].courseId);
+                if (booking.bookings[0].eduId === teacherLogin.eduId && booking.bookings[0].courseId === teacherLogin.courseId) {
+                    console.log("Matching Booking Found!");
+                    console.log("Educator Name:", booking.bookings[0].educatorName);
+                    console.log("Course Name:", booking.bookings[0].courseName);
+                    console.log("DateTime:", booking.bookings[0].datetime);
+                    return true;
+                }
+                return false;
+            });
+            console.log("Matching Bookings:", matchingBookings);
+            return { ...teacherLogin.toObject(), bookings: matchingBookings };
+        });
+
+        console.log("Combined Data:", combinedData);
+        res.json(combinedData);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -290,9 +316,34 @@ app.post("/api/v1/bookings", async (req, res) => {
     }
   });
   
+app.get("/api/v1/bookings", async (req, res) => {
+    try {
+      const bookings = await Booking.find();
+      res.json(bookings); 
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
-
-
+app.get('/api/v1/bookingSearch', async (req, res) => {
+    try {
+        const { key, page, limit } = req.query;
+        const skip = (page - 1) * limit;
+        const regexKey = typeof key === 'string' ? key : '';
+        const query = {
+            $or: [
+                { educatorName: { $regex: regexKey, $options: "i" } },
+                { courseName: { $regex: regexKey, $options: "i" } }
+            ]
+        };
+        const bookings = await Booking.find(query).skip(skip).limit(parseInt(limit));
+        res.status(200).json(bookings);
+    } catch (error) {
+        console.error("Error in /api/bookings:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 
 

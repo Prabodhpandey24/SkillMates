@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import imageUrls from '../teacher/user.jpeg';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../redux/Loginreducer';
 import { Link } from 'react-router-dom';
 
-const Edudashboard = () => {
-    const [teacherLogins, setTeacherLogins] = useState([]);
-    // const auth = localStorage.getItem("user");
+const Admindashboard = () => {
     const imageUrl = imageUrls;
-    const dispatch = useDispatch();
-    const edulogout = () => {
-        // localStorage.removeItem("Eduuser");
-        dispatch(logout())
-        console.warn("Mango");
-    };
+    const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/v1/teacherlogins')
+        fetch('http://localhost:5000/api/v1/bookings')
             .then((response) => response.json())
             .then((data) => {
-                setTeacherLogins(data);
-                console.warn('Fetched Data:', data);
+                setBookings(data);
+                console.log('Bookings Data:', data);
             })
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
+
 
     return (
         <div className='d-flex mt-3'>
@@ -64,6 +56,19 @@ const Edudashboard = () => {
                             <Link to=""><h5>Notify</h5></Link>
                         </div>
                     </div>
+
+                    <div className='m-3'>
+                        <div className=' d-flex'>
+                            <div className='me-2'>
+                                <Link to="">
+                                    <h3>
+                                        <b> Educator Dashboard </b>
+                                    </h3>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className='m-3'>
                         <div className=' d-flex'>
                             <div className='rounded-image-container me-3'>
@@ -71,12 +76,11 @@ const Edudashboard = () => {
                                     src={imageUrl}
                                     alt="User image"
                                     style={{ width: '35px', height: '35px', borderRadius: '50%', cursor: 'pointer' }}
-                                    title={teacherLogins.length > 0 ? teacherLogins[0].name : ''}
                                 />
                             </div>
-                            <h5>{teacherLogins.length > 0 ? teacherLogins[0].name : ''}</h5>
+                            <h5></h5>
                             <div className='ms-2'>
-                                <Link to="/" onClick={edulogout}>
+                                <Link to="/" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                         <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
                                         <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
@@ -88,7 +92,7 @@ const Edudashboard = () => {
                 </div>
 
                 <div className="m-3">
-                <table className="table table-bordered">
+                    <table className="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col"> SNo </th>
@@ -113,6 +117,7 @@ const Edudashboard = () => {
                                 </tr>
                             ))}
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -120,4 +125,4 @@ const Edudashboard = () => {
     );
 };
 
-export default Edudashboard;
+export default Admindashboard;

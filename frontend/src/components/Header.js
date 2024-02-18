@@ -145,7 +145,7 @@ const Header = () => {
     <div className="container-fluid p-0">
 
       <TopLoadingBar progress={loadingProgress} color="#f11946" height={3} />
-      {(location.pathname !== "/edudashboard" && location.pathname !== "/edudashlogin") && (<div className="py-3 navbarShadow">
+      {(location.pathname !== "/edudashboard" && location.pathname !== "/edudashlogin" && location.pathname !== "/admindashboard") && (<div className="py-3 navbarShadow">
         <div className="container-fluid">
           <div className="row">
             <div className="col-3">
@@ -196,6 +196,10 @@ const Header = () => {
 
                     <li>
                       <Link to="#">Order</Link>
+                    </li>
+
+                    <li>
+                      <Link to="/admindashboard">Admindashboard</Link>
                     </li>
 
                   </ul>
