@@ -325,23 +325,27 @@ app.get("/api/v1/bookings", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-app.get('/api/v1/bookingSearch', async (req, res) => {
+app.post('/api/v1/approve', async (req, res) => {
+    console.log("Hey1", req.body);
     try {
-        const { key, page, limit } = req.query;
-        const skip = (page - 1) * limit;
-        const regexKey = typeof key === 'string' ? key : '';
-        const query = {
-            $or: [
-                { educatorName: { $regex: regexKey, $options: "i" } },
-                { courseName: { $regex: regexKey, $options: "i" } }
-            ]
-        };
-        const bookings = await Booking.find(query).skip(skip).limit(parseInt(limit));
-        res.status(200).json(bookings);
+        const teacherLogins = await TeacherLogin.find();
+        console.log("Hey2..", teacherLogins);
+        const { eduId, courseId, educatorName, courseName } = req.body;
+        teacherLogins.map(teacherLogin => {
+        console.log("Hey4..");
+                if (eduId === teacherLogin.eduId && courseId === teacherLogin.courseId) {
+                    
+                    console.log("Matching Booking Found!");
+                    return true;
+                }
+                return false;
+        });
+
+
+        res.status(201).json({ message: 'Approved and inserted into teacherlogin table' });
     } catch (error) {
-        console.error("Error in /api/bookings:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error('Error approving:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

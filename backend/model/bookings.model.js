@@ -6,6 +6,7 @@ const bookingSchema = new Schema(
         bookings:[
             {
                 eduId: { type: Number, required: true },
+                userName: {type: String, require: true},
                 courseId: { type: Number, required: true },
                 educatorName: { type: String, required: true },
                 courseName: { type: String, required: true },

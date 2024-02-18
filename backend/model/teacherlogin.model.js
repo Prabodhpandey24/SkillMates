@@ -31,5 +31,3 @@ const teacherloginSchema = new Schema({
 const teacherlogin = mongoose.model("teacherlogin", teacherloginSchema);
 
 module.exports = teacherlogin;
-
-// bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }]
