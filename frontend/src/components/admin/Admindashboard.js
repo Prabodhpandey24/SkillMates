@@ -62,7 +62,7 @@ const Admindashboard = () => {
                             <div className='me-2'>
                                 <Link to="">
                                     <h3>
-                                        <b> Educator Dashboard </b>
+                                        <b> Admin Dashboard </b>
                                     </h3>
                                 </Link>
                             </div>
@@ -102,21 +102,27 @@ const Admindashboard = () => {
                                 <th scope="col"> Course Name </th>
                                 <th scope="col"> Date Time </th>
                                 <th scope="col"> Message </th>
+                                <th scope="col"> Approve </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {bookings.map((booking, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{booking.bookings[0].eduId}</td>
-                                    <td>{booking.bookings[0].courseId}</td>
-                                    <td>{booking.bookings[0].educatorName}</td>
-                                    <td>{booking.bookings[0].courseName}</td>
-                                    <td>{new Date(booking.bookings[0].datetime).toLocaleString()}</td>
-                                    <td>{booking.bookings[0].message}</td>
-                                </tr>
-                            ))}
+                            {bookings
+                                .slice() 
+                                .sort((a, b) => new Date(a.bookings[0].datetime) - new Date(b.bookings[0].datetime)) 
+                                .map((booking, index) => (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{booking.bookings[0].eduId}</td>
+                                        <td>{booking.bookings[0].courseId}</td>
+                                        <td>{booking.bookings[0].educatorName}</td>
+                                        <td>{booking.bookings[0].courseName}</td>
+                                        <td>{new Date(booking.bookings[0].datetime).toLocaleString()}</td>
+                                        <td>{booking.bookings[0].message}</td>
+                                        <td><button>Approve</button></td>
+                                    </tr>
+                                ))}
                         </tbody>
+
 
                     </table>
                 </div>
