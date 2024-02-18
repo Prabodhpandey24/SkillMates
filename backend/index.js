@@ -325,24 +325,41 @@ app.get("/api/v1/bookings", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
 app.post('/api/v1/approve', async (req, res) => {
     console.log("Hey1", req.body);
     try {
         const teacherLogins = await TeacherLogin.find();
-        console.log("Hey2..", teacherLogins);
-        const { eduId, courseId, educatorName, courseName } = req.body;
-        teacherLogins.map(teacherLogin => {
-        console.log("Hey4..");
-                if (eduId === teacherLogin.eduId && courseId === teacherLogin.courseId) {
-                    
-                    console.log("Matching Booking Found!");
-                    return true;
-                }
-                return false;
-        });
+        console.log("updated data ", teacherLogins[0].activeClassDash[0]);
+        const { eduId, courseId, educatorName, courseName, userName, dateTime, message } = req.body;
+        const newClassData = {
+            serialNo: '1',
+            dateDay: 'Monday',
+            courseName: 'Mathematics',
+            schoolName: 'ABC School',
+            classDuration: '1 hour',
+            activeLink: 'https://example.com/class',
+            educatorName: 'Alice Smith',
+            datetime: '2024-02-12T10:00:00Z',
+            message: 'This is a message for the class'
+        };
 
+        const matchedTeacherLogin = teacherLogins.find(teacherLogin => eduId === teacherLogin.eduId && courseId === teacherLogin.courseId);
 
-        res.status(201).json({ message: 'Approved and inserted into teacherlogin table' });
+        if (matchedTeacherLogin) {
+            // Use updateOne to update the document
+            await TeacherLogin.updateOne(
+                { eduId: eduId, courseId: courseId },
+                { $push: { activeClassDash: newClassData } }
+            );
+
+            console.log("Matching Booking Found and Updated!");
+            res.status(201).json({ message: 'Approved and inserted into teacherlogin table' });
+        } else {
+            console.log("Matching Booking Not Found!");
+            res.status(404).json({ error: 'Matching Booking Not Found' });
+        }
     } catch (error) {
         console.error('Error approving:', error);
         res.status(500).json({ error: 'Internal Server Error' });

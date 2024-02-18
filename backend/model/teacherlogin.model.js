@@ -13,12 +13,12 @@ const teacherloginSchema = new Schema({
 		{
 			serialNo: { type: String, required: true },
 			dateDay: { type: String, required: true },
-			courseName: { type: String, required: true },
 			schoolName: { type: String, required: true },
 			classDuration: { type: String, required: true },
 			activeLink: { type: String, required: true },
 			educatorName: { type: String, required: true },
 			courseName: { type: String, required: true },
+			userName: { type: String, required: true },
 			datetime: { type: String, required: true },
 			message: { type: String, required: true },
 		}

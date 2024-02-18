@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Edudashboard = () => {
     const [teacherLogins, setTeacherLogins] = useState([]);
+    const [bookings , setBookings] = useState([]);
     // const auth = localStorage.getItem("user");
     const imageUrl = imageUrls;
     const dispatch = useDispatch();
@@ -24,6 +25,12 @@ const Edudashboard = () => {
             })
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
+
+    useEffect(() => {
+        // Extract bookings from teacherLogins
+        const extractedBookings = teacherLogins.map(login => login.bookings).flat();
+        setBookings(extractedBookings);
+    }, [teacherLogins]);
 
     return (
         <div className='d-flex mt-3'>

@@ -27,13 +27,13 @@ const Admindashboard = () => {
         setFilteredBookings(filtered);
     };
 
-    const handleApprove = (eduId, courseId, educatorName, courseName) => {
+    const handleApprove = (eduId, courseId, educatorName, courseName , userName ,dateTime, message) => {
         fetch('http://localhost:5000/api/v1/approve', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ eduId, courseId, educatorName, courseName , }),
+            body: JSON.stringify({ eduId, courseId, educatorName, courseName , userName ,dateTime, message}),
         })
         .then(response => {
             // Handle response as needed
@@ -158,7 +158,7 @@ const Admindashboard = () => {
                                         <td>{booking.bookings[0].message}</td>
                                         <td>
                                             <button
-                                                onClick={() => handleApprove(booking.bookings[0].eduId, booking.bookings[0].courseId, booking.bookings[0].educatorName, booking.bookings[0].courseName)}
+                                                onClick={() => handleApprove(booking.bookings[0].eduId, booking.bookings[0].courseId, booking.bookings[0].educatorName, booking.bookings[0].courseName,booking.bookings[0].userName ,booking.bookings[0].datetime ,booking.bookings[0].message)}
                                             >
                                                 Approve
                                             </button>
