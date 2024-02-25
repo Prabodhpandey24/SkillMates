@@ -43,7 +43,7 @@ function EduDash_Login({visible}) {
       console.warn(result);
       if (result.email) {
         // localStorage.setItem("Eduuser", JSON.stringify(result));
-        dispatch(loginSuccess(email))
+        dispatch(loginSuccess(result))
         console.log("edulogin...")
         navigate("/edudashboard");
         console.log(">>>>>>>>>>>>>>>>>>edulogin...")
