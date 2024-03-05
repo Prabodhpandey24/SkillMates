@@ -207,6 +207,7 @@ app.get('/api/v1/teachers', async (req, res) => {
 
 // Teacher API for teacher dashboard login.
 const TeacherLogin = require('./model/teacherlogin.model.js'); 
+
 app.post("/api/v1/edudash", async (req, resp) => {
     try {
         if (req.body.password && req.body.email) {
@@ -366,6 +367,52 @@ app.post('/api/v1/approve', async (req, res) => {
     }
 });
 
+//school api:
+app.post('/api/v1/submitSchoolForm', async (req, res) => {
+    console.log("Body data", req.body);
+    try {
+        const { eduId, courseId, schoolName, classDuration, activeLink, educatorName, courseName, userName, datetime, message } = req.body;
+
+        // Find the teacherlogin document with matching eduId and courseId
+        const teacher = await TeacherLogin.findOne({ eduId, courseId });
+        console.log("teacher found", teacher);
+
+        if (!teacher) {
+            return res.status(404).json({ message: 'Teacher not found with provided eduId and courseId' });
+        }
+
+        // If teacher found, insert the form into activeschoolClassDash
+        teacher.activeschoolClassDash.push({
+            schoolName,
+            classDuration,
+            activeLink,
+            educatorName,
+            courseName,
+            userName,
+            datetime,
+            message
+        });
+
+        // Save the updated teacher document
+        await teacher.save();
+
+        // Respond with success message
+        return res.status(200).json({ message: 'School form submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting school form:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/api/v1/submitSchoolForm', async (req, res) => {
+    try {
+        const teachers = await TeacherLogin.find({}, { activeClassDash: 0 }); // Excluding activeClassDash
+        res.json(teachers);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
 
 
 

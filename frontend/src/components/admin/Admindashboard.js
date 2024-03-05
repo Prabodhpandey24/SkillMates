@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import imageUrls from '../teacher/user.jpeg';
 import { Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import SchoolForm from './SchoolForm';
+import School from './School';
 import Analyticshool from './Analytics';
 import Settingschool from './Setting';
 
@@ -27,7 +27,7 @@ const Admindashboard = () => {
                     </div>
 
                     <div className='p-3'>
-                        <Link to="#" onClick={() => handleLinkClick('schoolform')}>School</Link>
+                        <Link to="#" onClick={() => handleLinkClick('school')}>School</Link>
                     </div>
 
                     <div className='p-3'>
@@ -91,7 +91,7 @@ const Admindashboard = () => {
 
                 <div className="m-3">
                     {currentComponent === 'dashboard' && <Dashboard />}
-                    {currentComponent === 'schoolform' && <SchoolForm />}
+                    {currentComponent === 'school' && <School />}
                     {currentComponent === 'analyticschool' && <Analyticshool />}
                     {currentComponent === 'settingschool' && <Settingschool />}
                 </div>

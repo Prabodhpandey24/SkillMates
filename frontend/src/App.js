@@ -18,7 +18,7 @@ import Booking from './components/live/Booking';
 import Admindashboard from './components/admin/Admindashboard';
 
 // Admin panal
-import SchoolForm from './components/admin/SchoolForm';
+import School from './components/admin/School';
 import Dashboard from './components/admin/Dashboard';
 import Analyticshool from './components/admin/Analytics';
 import Settingschool from './components/admin/Setting';
@@ -40,7 +40,7 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/admindashboard" element={<Admindashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/schoolform" element={<SchoolForm />} />
+          <Route path="/school" element={<School />} />
           <Route path="/analyticschool" element={<Analyticshool />} />
           <Route path="/settingschool" element={<Settingschool />} />
 

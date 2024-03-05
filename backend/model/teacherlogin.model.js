@@ -11,16 +11,28 @@ const teacherloginSchema = new Schema({
 	courseId: {type: Number, require: true},
     activeClassDash:[
 		{
-			serialNo: { type: String, required: true },
-			dateDay: { type: String, required: true },
-			schoolName: { type: String, required: true },
-			classDuration: { type: String, required: true },
-			activeLink: { type: String, required: true },
-			educatorName: { type: String, required: true },
-			courseName: { type: String, required: true },
-			userName: { type: String, required: true },
-			datetime: { type: String, required: true },
-			message: { type: String, required: true },
+			serialNo: { type: String },
+			dateDay: { type: String },
+			schoolName: { type: String },
+			classDuration: { type: String },
+			activeLink: { type: String },
+			educatorName: { type: String },
+			courseName: { type: String },
+			userName: { type: String },
+			datetime: { type: String },
+			message: { type: String },
+		}
+	],
+	activeschoolClassDash: [
+		{
+			schoolName: { type: String },
+			classDuration: { type: String },
+			activeLink: { type: String },
+			educatorName: { type: String },
+			courseName: { type: String },
+			userName: { type: String },
+			datetime: { type: String },
+			message: { type: String },
 		}
 	]
 }, {

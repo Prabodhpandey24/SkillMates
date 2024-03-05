@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import imageUrls from '../teacher/user.jpeg';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/Loginreducer';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ const Edudashboard = () => {
     // const auth = localStorage.getItem("user");
     const imageUrl = imageUrls;
     const dispatch = useDispatch();
+    const reduxData = useSelector((state)=>state.auth.user.eduId);
+    console.log("ReduxData", reduxData);
     const edulogout = () => {
         // localStorage.removeItem("Eduuser");
         dispatch(logout())
@@ -109,6 +111,7 @@ const Edudashboard = () => {
                         </thead>
                         <tbody>
                             {bookings.map((booking, index) => (
+                                (booking.bookings[0].eduId == reduxData) &&
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{booking.bookings[0].eduId}</td>
