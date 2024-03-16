@@ -5,6 +5,8 @@ import Dashboard from './Dashboard';
 import School from './School';
 import Analyticshool from './Analytics';
 import Settingschool from './Setting';
+import Pending from './Pending';
+import Completed from './Completed';
 
 
 
@@ -36,6 +38,14 @@ const Admindashboard = () => {
 
                     <div className='p-3'>
                         <Link to="#" onClick={() => handleLinkClick('settingschool')}>Setting</Link>
+                    </div>
+
+                    <div className='p-3'>
+                        <Link to="#" onClick={() => handleLinkClick('pending')}>Pending</Link>
+                    </div>
+
+                    <div className='p-3'>
+                        <Link to="#" onClick={() => handleLinkClick('completed')}>Completed</Link>
                     </div>
                 </div>
             </div>
@@ -94,6 +104,8 @@ const Admindashboard = () => {
                     {currentComponent === 'school' && <School />}
                     {currentComponent === 'analyticschool' && <Analyticshool />}
                     {currentComponent === 'settingschool' && <Settingschool />}
+                    {currentComponent === 'pending' && <Pending />}
+                    {currentComponent === 'completed' && <Completed />}
                 </div>
             </div>
         </div>

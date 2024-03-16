@@ -208,6 +208,35 @@ app.get('/api/v1/teachers', async (req, res) => {
 // Teacher API for teacher dashboard login.
 const TeacherLogin = require('./model/teacherlogin.model.js'); 
 
+app.post("/api/v1/done", async (req, res) => {
+    try{
+
+    }catch{
+
+    }
+});
+
+app.get("/api/v1/pending", async (req, res) => {
+    try {
+        const pendingRecords = await TeacherLogin.aggregate([
+            // Unwind the activeClassDash array to denormalize it
+            { $unwind: "$activeClassDash" },
+            // Match documents where the status in activeClassDash is 'pending'
+            { $match: { "activeClassDash.status": "pending" } }
+        ]);
+
+        // If there are pending records, return them
+        if (pendingRecords.length > 0) {
+            res.status(200).json({ status: 'success', data: pendingRecords });
+        } else {
+            res.status(404).json({ status: 'success', message: 'No pending records found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 'error', message: 'Internal server error' });
+    }
+});
+
 app.post("/api/v1/edudash", async (req, resp) => {
     try {
         if (req.body.password && req.body.email) {
@@ -357,7 +386,8 @@ app.post('/api/v1/approve', async (req, res) => {
             educatorName: educatorName,
             datetime: dateTime,
             message: message,
-            userName: userName
+            userName: userName,
+            status: "pending"
         };
 
         const matchedTeacherLogin = teacherLogins.find(teacherLogin => eduId === teacherLogin.eduId && courseId === teacherLogin.courseId);

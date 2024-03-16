@@ -22,6 +22,8 @@ import School from './components/admin/School';
 import Dashboard from './components/admin/Dashboard';
 import Analyticshool from './components/admin/Analytics';
 import Settingschool from './components/admin/Setting';
+import Pending from './components/admin/Pending';
+import Completed from './components/admin/Completed';
 
 function App() {
 
@@ -43,6 +45,8 @@ function App() {
           <Route path="/school" element={<School />} />
           <Route path="/analyticschool" element={<Analyticshool />} />
           <Route path="/settingschool" element={<Settingschool />} />
+          <Route path="/pending" element={<Pending />} />
+          <Route path="/completed" element={<Completed />} />
 
           <Route path="/edudashlogin" element={<PrivateComponent />} >
             <Route index element={<EduDash_Login />} />

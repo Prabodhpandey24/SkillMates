@@ -21,6 +21,7 @@ const teacherloginSchema = new Schema({
 			userName: { type: String },
 			datetime: { type: String },
 			message: { type: String },
+			status: {type: String}
 		}
 	],
 	activeschoolClassDash: [

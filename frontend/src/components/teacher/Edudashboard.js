@@ -107,6 +107,8 @@ const Edudashboard = () => {
                                 <th scope="col"> Course Name </th>
                                 <th scope="col"> Date Time </th>
                                 <th scope="col"> Message </th>
+                                <th scope='col'>Status</th>
+                                <th scope='col'>Done</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,6 +122,8 @@ const Edudashboard = () => {
                                     <td>{booking.bookings[0].courseName}</td>
                                     <td>{new Date(booking.bookings[0].datetime).toLocaleString()}</td>
                                     <td>{booking.bookings[0].message}</td>
+                                    <td>{booking.bookings[0].status}</td>
+                                    <td><Link to="">Done</Link></td>
                                 </tr>
                             ))}
                         </tbody>
