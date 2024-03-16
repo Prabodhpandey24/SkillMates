@@ -274,6 +274,7 @@ app.post("/api/v1/edudash", async (req, resp) => {
         resp.status(500).send({ result: "Internal server error" });
     }
 });
+
 app.get('/api/v1/teacherlogins', async (req, res) => {
     try {
         // Fetch teacher logins
