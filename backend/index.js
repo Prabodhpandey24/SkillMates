@@ -320,6 +320,9 @@ app.post("/api/v1/bookings", async (req, res) => {
 app.get("/api/v1/bookings", async (req, res) => {
     try {
       const bookings = await Booking.find();
+      console.log("Bookings", bookings.booking);
+      var datetime = new Date();
+      console.log(datetime);
       res.json(bookings); 
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -327,6 +330,18 @@ app.get("/api/v1/bookings", async (req, res) => {
     }
 });
 
+//Datetime 
+const { DateTime } = require('luxon'); 
+app.get("/api/v1/datetime", async (req, res) => {
+    try {
+        var datetime = DateTime.now().setZone('Asia/Kolkata');
+        console.log(datetime.toISO());
+        res.json(datetime.toISO());
+    } catch (error) {
+        console.error("Error fetching datetime:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 app.post('/api/v1/approve', async (req, res) => {
     console.log("Hey1", req.body);
