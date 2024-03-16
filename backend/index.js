@@ -348,17 +348,16 @@ app.post('/api/v1/approve', async (req, res) => {
     try {
         const teacherLogins = await TeacherLogin.find();
         console.log("updated data ", teacherLogins[0].activeClassDash[0]);
-        const { eduId, courseId, educatorName, courseName, userName, dateTime, message } = req.body;
+        const { eduId, courseId, educatorName, courseName, userName, dateTime, message, schoolName, classDuration, activeLink } = req.body;
         const newClassData = {
-            serialNo: '1',
-            dateDay: 'Monday',
-            courseName: 'Mathematics',
-            schoolName: 'ABC School',
-            classDuration: '1 hour',
-            activeLink: 'https://example.com/class',
-            educatorName: 'Alice Smith',
-            datetime: '2024-02-12T10:00:00Z',
-            message: 'This is a message for the class'
+            courseName: courseName,
+            schoolName: schoolName,
+            classDuration: classDuration,
+            activeLink: activeLink,
+            educatorName: educatorName,
+            datetime: dateTime,
+            message: message,
+            userName: userName
         };
 
         const matchedTeacherLogin = teacherLogins.find(teacherLogin => eduId === teacherLogin.eduId && courseId === teacherLogin.courseId);

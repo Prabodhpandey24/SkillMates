@@ -12,7 +12,6 @@ const bookingSchema = new Schema(
                 courseName: { type: String, required: true },
                 datetime: { type: Date, required: true },
                 message: { type: String, required: true },
-                status: { type: String, required: true },
             }
         ]
     },
