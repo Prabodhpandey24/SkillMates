@@ -216,16 +216,31 @@ app.post("/api/v1/done", async (req, res) => {
     }
 });
 
+app.get("/api/v1/done", async (req, res) => {
+    try {
+        const doneRecords = await TeacherLogin.aggregate([
+            { $unwind: "$activeClassDash" },
+            { $match: { "activeClassDash.status": "done" } }
+        ]);
+
+        if (doneRecords.length > 0) {
+            res.status(200).json({ status: 'success', data: doneRecords });
+        } else {
+            res.status(404).json({ status: 'success', message: 'No done records found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 'error', message: 'Internal server error' });
+    }
+});
+
 app.get("/api/v1/pending", async (req, res) => {
     try {
         const pendingRecords = await TeacherLogin.aggregate([
-            // Unwind the activeClassDash array to denormalize it
             { $unwind: "$activeClassDash" },
-            // Match documents where the status in activeClassDash is 'pending'
             { $match: { "activeClassDash.status": "pending" } }
         ]);
 
-        // If there are pending records, return them
         if (pendingRecords.length > 0) {
             res.status(200).json({ status: 'success', data: pendingRecords });
         } else {
