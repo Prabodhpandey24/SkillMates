@@ -2,15 +2,13 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import TopLoadingBar from "react-top-loading-bar";
-import LoadingOverlay from "./Loader/LoadingOverlay";
-import Background1 from "../img/background2.png"
-// import { useDispatch, useSelector } from 'react-redux';
-// import { loginSuccess, logout } from '../redux/Loginreducer';
-import Teacher from "./teacher/Teacher";
-import { Link } from 'react-router-dom';
+import LoadingOverlay from "../Loader/LoadingOverlay";
+import Background1 from "../homecarousel/img/homeIcon.png"
+import {useSelector, useDispatch} from 'react-redux'
+import {loginSuccess} from '../../redux/Loginreducer'
 
 
-function SignIn({visible}) {
+function EduDash_Login({visible}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +17,9 @@ function SignIn({visible}) {
   const navigate = useNavigate();
   const loadingBar = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-  // const dispatch = useDispatch();
-  // const reduxdata = useSelector((state)=>state);
+  const dispatch = useDispatch();
+
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -30,41 +29,33 @@ function SignIn({visible}) {
     loadingBar.current.continuousStart();
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      let result = await fetch("http://localhost:5000/api/v1/login", {
-        method: "post",
-        body: JSON.stringify({ email, password }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      result = await result.json();
-      console.log(result);
-      if (result.email) {
-        localStorage.setItem("user", JSON.stringify(result));
-        // dispatch(loginSuccess("RishuPandeyLogedin"));
-        // if (result.role === "Teacher") {
-        //   console.log("Role", result.role);
-        //   navigate("/teacher");
-        // } else {
-        //   navigate("/");
-        // }
-        navigate("/");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        let result = await fetch("http://localhost:5000/api/v1/adminlogin", {
+            method: "post",
+            body: JSON.stringify({ email, password }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
 
-        // console.log(reduxdata);
-      } else {
-        setErrorMessage("Enter a valid Email and Password!...");
-      }
+        if (result.ok) {
+            const data = await result.json();
+            dispatch(loginSuccess(data));
+            console.log("adminlogin...",data);
+            navigate("/admindashboard");
+            console.log(">>>>>>>>>>>>>>>>>>adminlogin...");
+        } else {
+            setErrorMessage("Enter a valid Email and Password!...");
+        }
     } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("An error occurred while logging in.");
+        console.error("Error:", error);
+        setErrorMessage("An error occurred while logging in.");
     } finally {
-      setLoading(false);
-      loadingBar.current.complete();
+        setLoading(false);
+        loadingBar.current.complete();
     }
-  };
+};
 
-  // console.log("visible", visible);
 
   return (
     <div className="container-fluid">
@@ -138,9 +129,6 @@ function SignIn({visible}) {
                       )}
                     </button>
                   </div>
-                  <Link className="d-block text-center mt-2 small" to="/signup">
-                    Don't have an account? Register
-                  </Link>
                 </form>
               </div>
             </div>
@@ -151,4 +139,4 @@ function SignIn({visible}) {
   );
 }
 
-export default SignIn;
+export default EduDash_Login;

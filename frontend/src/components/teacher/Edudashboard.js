@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import imageUrls from '../teacher/user.jpeg';
-import {useDispatch, useSelector} from 'react-redux';
-import {logout} from '../../redux/Loginreducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/Loginreducer';
 import { Link } from 'react-router-dom';
 
 const Edudashboard = () => {
     const [teacherLogins, setTeacherLogins] = useState([]);
-    const [bookings , setBookings] = useState([]);
-    // const auth = localStorage.getItem("user");
+    const [bookings, setBookings] = useState([]);
     const imageUrl = imageUrls;
     const dispatch = useDispatch();
-    const reduxData = useSelector((state)=>state.auth.user.eduId);
-    console.log("ReduxData", reduxData);
+    const reduxDataEduid = useSelector((state) => state.auth.user.eduId);
+    // console.log("ReduxData", reduxData);
+    const reduxeduuser = useSelector((state) => state.auth.user.name);
+    // console.log("reduxeduuser", reduxeduuser);
+    const alleducatordata = useSelector((state) => state.auth.user);
+    // console.log("alleducatordata", alleducatordata);
+
     const edulogout = () => {
-        // localStorage.removeItem("Eduuser");
-        dispatch(logout())
-        console.warn("Mango");
+        dispatch(logout());
+        // console.warn("Mango");
     };
 
     useEffect(() => {
@@ -23,16 +26,44 @@ const Edudashboard = () => {
             .then((response) => response.json())
             .then((data) => {
                 setTeacherLogins(data);
-                console.warn('Fetched Data:', data);
+                console.log('Edudashboard Data:', data);
             })
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
 
     useEffect(() => {
         // Extract bookings from teacherLogins
-        const extractedBookings = teacherLogins.map(login => login.bookings).flat();
+        const extractedBookings = teacherLogins.flatMap(login => login.activeClassDash || []);
+        // console.log("extractedBookings",extractedBookings);
         setBookings(extractedBookings);
     }, [teacherLogins]);
+
+    const markAsComplete = (eduId, courseId, userId) => {
+        fetch('http://localhost:5000/api/v1/done', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ eduId, courseId, userId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // console.log('Marked as complete:', data);
+                // Refresh the teacher logins after marking as complete
+                fetchTeacherLogins();
+            })
+            .catch(error => console.error('Error marking as complete:', error));
+    };
+
+    const fetchTeacherLogins = () => {
+        fetch('http://localhost:5000/api/v1/teacherlogins')
+            .then((response) => response.json())
+            .then((data) => {
+                setTeacherLogins(data);
+                // console.log('Edudashboard Data:', data);
+            })
+            .catch((error) => console.error('Error fetching data:', error));
+    };
 
     return (
         <div className='d-flex mt-3'>
@@ -83,7 +114,7 @@ const Edudashboard = () => {
                                     title={teacherLogins.length > 0 ? teacherLogins[0].name : ''}
                                 />
                             </div>
-                            <h5>{teacherLogins.length > 0 ? teacherLogins[0].name : ''}</h5>
+                            <h5>{reduxeduuser}</h5>
                             <div className='ms-2'>
                                 <Link to="/" onClick={edulogout}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -97,10 +128,11 @@ const Edudashboard = () => {
                 </div>
 
                 <div className="m-3">
-                <table className="table table-bordered">
+                    <table className="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col"> SNo </th>
+                                <th scope='col'>User Id</th>
                                 <th scope="col"> Educator Id </th>
                                 <th scope="col"> Course Id </th>
                                 <th scope="col"> Educator Name </th>
@@ -108,29 +140,39 @@ const Edudashboard = () => {
                                 <th scope="col"> Date Time </th>
                                 <th scope="col"> Message </th>
                                 <th scope='col'>Status</th>
-                                <th scope='col'>Done</th>
+                                <th scope='col'>Complete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {bookings.map((booking, index) => (
-                                (booking.bookings[0].eduId == reduxData) &&
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{booking.bookings[0].eduId}</td>
-                                    <td>{booking.bookings[0].courseId}</td>
-                                    <td>{booking.bookings[0].educatorName}</td>
-                                    <td>{booking.bookings[0].courseName}</td>
-                                    <td>{new Date(booking.bookings[0].datetime).toLocaleString()}</td>
-                                    <td>{booking.bookings[0].message}</td>
-                                    <td>{booking.bookings[0].status}</td>
-                                    <td><Link to="">Done</Link></td>
-                                </tr>
+                            {teacherLogins.map((login, index) => (
+                                login.activeClassDash && login.activeClassDash.map((booking, subIndex) => (
+                                    // Add condition to match eduId with reduxDataEduid
+                                    (reduxDataEduid === login.eduId) &&
+                                    <tr key={`${index}-${subIndex}`}>
+                                        <td>{subIndex + 1}</td>
+                                        <td>{booking.userId}</td>
+                                        <td>{login.eduId}</td>
+                                        <td>{login.courseId}</td>
+                                        <td>{booking.educatorName}</td>
+                                        <td>{booking.courseName}</td>
+                                        <td>{new Date(booking.datetime).toLocaleString()}</td>
+                                        <td>{booking.message}</td>
+                                        <td>{booking.status}</td>
+                                        <td>
+                                            {booking.status === 'pending' && (
+                                                <Link to="#" onClick={() => markAsComplete(login.eduId, booking.courseId, booking.userId)}>Complete</Link>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))
                             ))}
                         </tbody>
+
+
                     </table>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

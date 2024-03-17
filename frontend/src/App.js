@@ -24,6 +24,7 @@ import Analyticshool from './components/admin/Analytics';
 import Settingschool from './components/admin/Setting';
 import Pending from './components/admin/Pending';
 import Completed from './components/admin/Completed';
+import Adminlogin from './components/admin/Adminlogin';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/settingschool" element={<Settingschool />} />
           <Route path="/pending" element={<Pending />} />
           <Route path="/completed" element={<Completed />} />
+          <Route path="/adminlogin" element={<Adminlogin />} />
 
           <Route path="/edudashlogin" element={<PrivateComponent />} >
             <Route index element={<EduDash_Login />} />

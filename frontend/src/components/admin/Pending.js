@@ -8,7 +8,11 @@ const Pending = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Pending Data", data);
-                setPendingData(data.data); // Set the pending data in state
+                if (data && data.data) {
+                    setPendingData(data.data); // Set the pending data in state
+                } else {
+                    console.error('Invalid data format received from the API');
+                }
             })
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
@@ -25,6 +29,7 @@ const Pending = () => {
                             <th scope="col">Educator Name</th>
                             <th scope="col">Date & Time</th>
                             <th scope="col">Message</th>
+                            <th scope='col'>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +40,7 @@ const Pending = () => {
                                 <td>{item.activeClassDash.educatorName}</td>
                                 <td>{item.activeClassDash.datetime}</td>
                                 <td>{item.activeClassDash.message}</td>
+                                <td>{item.activeClassDash.status}</td>
                             </tr>
                         ))}
                     </tbody>

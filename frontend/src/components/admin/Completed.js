@@ -30,6 +30,7 @@ const Completed = () => {
                             <th scope="col">Educator Name</th>
                             <th scope="col">Date & Time</th>
                             <th scope="col">Message</th>
+                            <th scope='col'>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,7 @@ const Completed = () => {
                                 <td>{item.activeClassDash.educatorName}</td>
                                 <td>{item.activeClassDash.datetime}</td>
                                 <td>{item.activeClassDash.message}</td>
+                                <td>{item.activeClassDash.status}</td>
                             </tr>
                         ))}
                     </tbody>

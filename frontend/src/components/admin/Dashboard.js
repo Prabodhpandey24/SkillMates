@@ -27,13 +27,13 @@ const Dashboard = () => {
         setFilteredBookings(filtered);
     };
 
-    const handleApprove = (eduId, courseId, educatorName, courseName , userName ,dateTime, message) => {
+    const handleApprove = (eduId, courseId, educatorName, courseName , userName ,dateTime, message, userId) => {
         fetch('http://localhost:5000/api/v1/approve', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ eduId, courseId, educatorName, courseName , userName ,dateTime, message}),
+            body: JSON.stringify({ eduId, courseId, educatorName, courseName , userName ,dateTime, message, userId}),
         })
         .then(response => {
             // Handle response as needed
@@ -62,6 +62,7 @@ const Dashboard = () => {
                         <thead>
                             <tr>
                                 <th scope="col"> SNo </th>
+                                <th scope="col"> User id </th>
                                 <th scope="col"> User </th>
                                 <th scope="col"> Educator Id </th>
                                 <th scope="col"> Course Id </th>
@@ -79,6 +80,7 @@ const Dashboard = () => {
                                 .map((booking, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
+                                        <td>{booking.bookings[0].userId}</td>
                                         <td>{booking.bookings[0].userName}</td>
                                         <td>{booking.bookings[0].eduId}</td>
                                         <td>{booking.bookings[0].courseId}</td>
@@ -88,7 +90,7 @@ const Dashboard = () => {
                                         <td>{booking.bookings[0].message}</td>
                                         <td>
                                             <button
-                                                onClick={() => handleApprove(booking.bookings[0].eduId, booking.bookings[0].courseId, booking.bookings[0].educatorName, booking.bookings[0].courseName,booking.bookings[0].userName ,booking.bookings[0].datetime ,booking.bookings[0].message)}
+                                                onClick={() => handleApprove(booking.bookings[0].eduId, booking.bookings[0].courseId, booking.bookings[0].educatorName, booking.bookings[0].courseName,booking.bookings[0].userName ,booking.bookings[0].datetime ,booking.bookings[0].message, booking.bookings[0].userId)}
                                             >
                                                 Approve
                                             </button>

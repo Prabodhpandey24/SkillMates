@@ -199,7 +199,7 @@ const Header = () => {
                     </li>
 
                     <li>
-                      <Link to="/admindashboard">Admindashboard</Link>
+                      <Link to="/adminlogin">Admindashboard</Link>
                     </li>
 
                   </ul>

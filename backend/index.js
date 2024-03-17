@@ -209,10 +209,22 @@ app.get('/api/v1/teachers', async (req, res) => {
 const TeacherLogin = require('./model/teacherlogin.model.js'); 
 
 app.post("/api/v1/done", async (req, res) => {
-    try{
-
-    }catch{
-
+    try {
+        const { userId } = req.body; 
+        const teacher = await TeacherLogin.findOne({ 'activeClassDash.userId': userId });
+        if (!teacher) {
+            return res.status(404).json({ message: "Teacher not found" });
+        }
+        teacher.activeClassDash.forEach(item => {
+            if (item.userId === userId) {
+                item.status = "complete";
+            }
+        });
+        await teacher.save();
+        return res.status(200).json({ message: "Status updated successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 });
 
@@ -220,7 +232,7 @@ app.get("/api/v1/done", async (req, res) => {
     try {
         const doneRecords = await TeacherLogin.aggregate([
             { $unwind: "$activeClassDash" },
-            { $match: { "activeClassDash.status": "done" } }
+            { $match: { "activeClassDash.status": "complete" } }
         ]);
 
         if (doneRecords.length > 0) {
@@ -393,7 +405,7 @@ app.post('/api/v1/approve', async (req, res) => {
     try {
         const teacherLogins = await TeacherLogin.find();
         console.log("updated data ", teacherLogins[0].activeClassDash[0]);
-        const { eduId, courseId, educatorName, courseName, userName, dateTime, message, schoolName, classDuration, activeLink } = req.body;
+        const { eduId, courseId, educatorName, courseName, userName, dateTime, message, schoolName, classDuration, activeLink, userId } = req.body;
         const newClassData = {
             courseName: courseName,
             schoolName: schoolName,
@@ -403,7 +415,8 @@ app.post('/api/v1/approve', async (req, res) => {
             datetime: dateTime,
             message: message,
             userName: userName,
-            status: "pending"
+            status: "pending",
+            userId: userId
         };
 
         const matchedTeacherLogin = teacherLogins.find(teacherLogin => eduId === teacherLogin.eduId && courseId === teacherLogin.courseId);
@@ -466,7 +479,7 @@ app.post('/api/v1/submitSchoolForm', async (req, res) => {
 
 app.get('/api/v1/submitSchoolForm', async (req, res) => {
     try {
-        const teachers = await TeacherLogin.find({}, { activeClassDash: 0 }); // Excluding activeClassDash
+        const teachers = await TeacherLogin.find({}, { activeClassDash: 0 });
         res.json(teachers);
     } catch (err) {
         console.error(err);
@@ -474,7 +487,24 @@ app.get('/api/v1/submitSchoolForm', async (req, res) => {
     }
 });
 
-
+const AdminLogin = require('./model/adminlogin.modal.js'); 
+app.post('/api/v1/adminlogin', async (req, res) => {
+    try {
+        console.log("Admin Data", req.body);
+        const { email, password } = req.body;
+        const admin = await AdminLogin.findOne({ email, password });
+        console.log("My admin", admin);
+        if (admin) {
+            // Here you can generate a token or set a session to manage admin authentication
+            res.status(200).json({ message: 'Login successful' });
+        } else {
+            res.status(401).json({ message: 'Invalid email or password' });
+        }
+    } catch (err) {
+        console.error('Error during admin login:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 const PORT = process.env.PORT || 5000
 

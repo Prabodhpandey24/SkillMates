@@ -11,7 +11,8 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem('user'));
   const userName = userData.name;
-  console.log("User Name:", userName); // Log the user name
+  const userId = userData.id;
+  console.log("User Name:", userId); // Log the user name
 
   const handleInputChange = (event) => {
     setMessage(event.target.value);
@@ -23,6 +24,7 @@ const Booking = ({ courseId, courseName, edu_id, educator_name }) => {
         bookings: [{
           eduId: edu_id,
           courseId: courseId,
+          userId: userId,
           userName: userName,
           educatorName: educator_name,
           courseName: courseName,
